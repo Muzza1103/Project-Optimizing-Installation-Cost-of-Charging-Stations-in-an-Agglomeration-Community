@@ -37,7 +37,7 @@ public class Ca {
 		try {
 			if (i!=-1 && j!=-1){
 				matriceAdj[i][j]=matriceAdj[j][i]=true;
-			}else if (i!=-1) {
+			}else if (i==-1) {
 				throw new IllegalArgumentException("La ville "+A+" n'existe pas !");
 			}else {
 				throw new IllegalArgumentException("La ville "+B+" n'existe pas !");
@@ -47,5 +47,25 @@ public class Ca {
 		}
 	}
 	
+	public void ajouterZoneDeRecharge(String A) {
+		try {
+			int i=-1;
+			for (int k = 0; k<villes.size();k++) {
+				if (villes.get(k).getNom().equals(A)){
+					i = k;
+					villes.get(k).ajouterZone();
+				}
+			}
+			if (i==1) {
+				throw new IllegalArgumentException("La ville "+A+" n'existe pas !");
+			}
+		}catch(IllegalArgumentException e ) {
+			System.out.println("Erreur : "+e.getMessage());
+		}
+	}
 	
+	
+	public void retirerZoneDeRecharge(String A) {
+		
+	}
 }
