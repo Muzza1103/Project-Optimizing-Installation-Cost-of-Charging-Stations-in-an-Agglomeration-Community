@@ -12,4 +12,20 @@ public class Ville {
 	public String getNom() {
 		return nom;
 	}
+	
+	public void ajouterZone() {
+		if(zoneDeRecharge) {
+			System.out.println("Il existe déjà une zone de recharge dans la ville "+nom);
+		}else {
+			zoneDeRecharge = true;
+		}
+	}
+	
+	public void retirerZone() {
+		if(zoneDeRecharge) {
+			System.out.println("Il n'existe pas de zone de recharge dans la ville : "+nom);
+		}else {
+			zoneDeRecharge = false;
+		}
+	}
 }
