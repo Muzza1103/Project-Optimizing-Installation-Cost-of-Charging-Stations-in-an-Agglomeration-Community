@@ -11,20 +11,24 @@ public class Ca {
 	private List<Ville> villes;
 	
     // Constructeur
-	public Ca(int nbrVille) {
+	public Ca() {
 		//nombre de ville
-		this.nbrVille = nbrVille;
+		this.nbrVille = 26;
 		villes = new ArrayList<>();
 		matriceAdj = new boolean[nbrVille][nbrVille];
 	}
 	//Ajout d'une ville
 	public void ajouterVille(String nom){
-		if (villes.size() < nbrVille) {
-            villes.add(new Ville(nom));
-            System.out.println("Ville ajoutée : " + nom);
-		} else {
-        System.out.println("Le nombre maximum de villes est atteint (" + nbrVille + "). Impossible d'ajouter : " + nom);
-    	}
+		try {
+			if (villes.size() < nbrVille) {
+				villes.add(new Ville(nom));
+				System.out.println("Ville ajoutée : " + nom);
+			} else {
+				throw new IndexOutOfBoundsException("Le nombre maximum de villes est atteint (" + nbrVille + "). Impossible d'ajouter : " + nom);
+			}
+		}catch(IndexOutOfBoundsException e){
+			System.out.println("Erreur : "+e.getMessage());
+		}
 	}
 	//ajout d'une route
 	public void ajouterRoute(String A, String B) {
@@ -43,8 +47,10 @@ public class Ca {
 				matriceAdj[i][j]=matriceAdj[j][i]=true;
 			}else if (i==-1) {
 				throw new IllegalArgumentException("La ville "+A+" n'existe pas !");
-			}else {
+			}else if (j==-1){
 				throw new IllegalArgumentException("La ville "+B+" n'existe pas !");
+			}else if (i==j) {
+				throw new IllegalArgumentException(A+" et "+B+" sont la même ville !");
 			}
 		}catch(IllegalArgumentException e ) {
 			System.out.println("Erreur : "+e.getMessage());
