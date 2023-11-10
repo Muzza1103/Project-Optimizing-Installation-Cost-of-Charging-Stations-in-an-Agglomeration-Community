@@ -50,7 +50,7 @@ public class Ca {
 			}else if (j==-1){
 				throw new IllegalArgumentException("La ville "+B+" n'existe pas !");
 			}else if (i==j) {
-				throw new IllegalArgumentException(A+" et "+B+" sont la même ville !");
+				throw new IllegalArgumentException(A+" et "+B+" sont la même ville, vous ne pouvez pas créer de route entre eux !");
 			}
 		}catch(IllegalArgumentException e ) {
 			System.out.println("Erreur : "+e.getMessage());
