@@ -13,8 +13,8 @@ public class Ca {
     // Constructeur
 	public Ca() {
 		//nombre de ville
-		this.nbrVille = 26;
-		villes = new ArrayList<>();
+		nbrVille = 26;
+		villes = new ArrayList<Ville>();
 		matriceAdj = new boolean[nbrVille][nbrVille];
 	}
 	//Ajout d'une ville
@@ -77,11 +77,15 @@ public class Ca {
 	// Suppression d'une zone de recharge
 	public void retirerZoneDeRecharge(String A) {
 		// Tente de retirer une zone de recharge de la ville A
-		try {
 			int i=-1;
+			int j=-1;
+			try {
 			for (int k = 0; k<villes.size();k++) {
 				if (villes.get(k).getNom().equals(A)){
 					i = k;
+					j = k;
+					}
+				if (matriceAdj[i][j]==true || matriceAdj[j][i]==true || matriceAdj[i-1][j]==true || matriceAdj[j-1][i]==true) {
 					villes.get(k).retirerZone();
 				}
 			}
