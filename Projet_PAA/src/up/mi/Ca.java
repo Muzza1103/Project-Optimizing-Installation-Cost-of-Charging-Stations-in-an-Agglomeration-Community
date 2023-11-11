@@ -116,7 +116,7 @@ public class Ca {
 				for (int j=0;j<villes.size();j++) {
 					if (matriceAdj[i][j]==true) {
 						if (!verifVoisin(j)) {
-							villePbm.add(j); //Stocke le nom de toutes les villes problématiques pour lesquelles la contrainte ne serait pas respecté
+							villePbm.add(j); //Permet d'accéder au nom de toutes les villes problématiques pour lesquelles la contrainte ne serait pas respecté
 						}
 					}
 				}
