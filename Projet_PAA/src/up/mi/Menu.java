@@ -44,6 +44,8 @@ public class Menu {
             menu2();
             System.out.println("\nListe des villes possédant des zones de recharge :");
             ca.afficheVillesAvecZone();
+            System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
+            ca.afficheVillesSansZone();
             
             // Lire le choix de l'utilisateur
             choix = sc.nextInt();
@@ -53,6 +55,7 @@ public class Menu {
             	case 1:
             		System.out.println("\nEntrez le nom de la ville où vous souhaitez ajouter une borne de recharge.");
             		String ajout = sc.nextLine().toUpperCase(); //Affin d'eviter les pb d'oublie de maj ect...
+                    
                 
             		// Appel de la méthode pour ajouter une zone de recharge dans une ville
             		ca.ajouterZoneDeRecharge(ajout);

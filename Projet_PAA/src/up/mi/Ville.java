@@ -16,6 +16,10 @@ public class Ville {
 	public boolean getZone() {
 		return zoneDeRecharge;
 	}
+	public boolean getZoneSans() {
+		return !zoneDeRecharge;
+	}
+	
 	
 	public void ajouterZone() {
 		if(zoneDeRecharge) {

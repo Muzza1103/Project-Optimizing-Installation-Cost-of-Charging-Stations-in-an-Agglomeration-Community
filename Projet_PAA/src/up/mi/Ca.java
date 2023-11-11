@@ -131,12 +131,10 @@ public class Ca {
 					}else {
 						sb.append("ne respecteront plus la constrainte d'accessibilité !");
 					}
-					villes.get(i).ajouterZone(); //Rajoute la zone de recharge que l'on avait temporairement retiré car il est impossible de retirer la zone de A en respectant la contrainte d'accessibilité 
 					throw new IllegalArgumentException(sb.toString());
-				}else {
-					return;
 				}
 			}else {
+				villes.get(i).ajouterZone();//Rajoute la zone de recharge que l'on avait temporairement retiré car il est impossible de retirer la zone de A en respectant la contrainte d'accessibilité 
 				throw new IllegalArgumentException("Les villes voisines de "+A+" ne possédent pas de zone de recharge");
 			}
 		}catch(IllegalArgumentException e ) {
@@ -165,6 +163,16 @@ public class Ca {
 		StringBuilder sb = new StringBuilder();
 		for (int i=0;i<villes.size();i++) {
 			if(villes.get(i).getZone()) {
+				sb.append(villes.get(i).getNom()+" ");
+			}
+		}
+		System.out.println(sb.toString());
+	}
+	
+	public void afficheVillesSansZone() {
+		StringBuilder sb = new StringBuilder();
+		for (int i=0;i<villes.size();i++) {
+			if(villes.get(i).getZoneSans()) {
 				sb.append(villes.get(i).getNom()+" ");
 			}
 		}
