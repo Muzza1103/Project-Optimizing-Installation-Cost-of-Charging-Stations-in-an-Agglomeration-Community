@@ -11,15 +11,35 @@ public class Ca {
 	private List<Ville> villes;
 	
     // Constructeur
-	public Ca() {
-		//nombre de ville
-		nbrVille = 26;
-		villes = new ArrayList<Ville>();
-		matriceAdj = new boolean[nbrVille][nbrVille];
+	public Ca(int nbrVille) {
+		try {
+			if(nbrVille<=26) {
+				this.nbrVille = nbrVille;
+				villes = new ArrayList<Ville>();
+				matriceAdj = new boolean[nbrVille][nbrVille];
+				
+				for (int i = 0; i < nbrVille; i++) { //Permet de créer 
+		            Character nomCharVille = (char) ('A' + i);
+		            String nomVille = String.valueOf(nomCharVille);
+		            villes.add(new Ville(nomVille));
+		        }
+			}else {
+				throw new IllegalArgumentException("Vous ne pouvez pas avoir plus de 26 villes !");
+			}
+		}catch(IllegalArgumentException f) {
+			System.out.println("Erreur : "+f.getMessage());
+		}
 	}
+	
+	/* Pour la partie 2
 	//Ajout d'une ville
 	public void ajouterVille(String nom){
 		try {
+			for (Ville v : villes) {
+				if(v.getNom().equals(nom)) {
+					throw new IllegalArgumentException("La ville "+nom+" existe déjà !");
+				}
+			}
 			if (villes.size() < nbrVille) {
 				villes.add(new Ville(nom));
 				System.out.println("Ville ajoutée : " + nom);
@@ -28,8 +48,12 @@ public class Ca {
 			}
 		}catch(IndexOutOfBoundsException e){
 			System.out.println("Erreur : "+e.getMessage());
+		}catch(IllegalArgumentException f) {
+			System.out.println("Erreur : "+f.getMessage());
 		}
 	}
+	*/
+	
 	//ajout d'une route
 	public void ajouterRoute(String A, String B) {
 		int i=-1;
@@ -74,27 +98,77 @@ public class Ca {
 		}
 	}
 	
-	// Suppression d'une zone de recharge
+	// Suppression de la zone de recharge de la ville A
 	public void retirerZoneDeRecharge(String A) {
-		// Tente de retirer une zone de recharge de la ville A
-			int i=-1;
-			int j=-1;
-			try {
+		int i=-1;
+		try {
 			for (int k = 0; k<villes.size();k++) {
 				if (villes.get(k).getNom().equals(A)){
 					i = k;
-					j = k;
 					}
-				if (matriceAdj[i][j]==true || matriceAdj[j][i]==true || matriceAdj[i-1][j]==true || matriceAdj[j-1][i]==true) {
-					villes.get(k).retirerZone();
-				}
 			}
-			//affiche un message d'erreur si la ville n'exsite pas 
 			if (i==-1) {
 				throw new IllegalArgumentException("La ville "+A+" n'existe pas !");
+			}
+			villes.get(i).retirerZone(); //On enléve temporairement la zone de recharge de la ville A pour vérifier que la contrainte d'accessibilté est respecté pour ses villes voisines
+			if(verifVoisin(i)) { // Vérifie que A posséde une ville voisine qui posséde une zone de recharge
+				List<Integer> villePbm = new ArrayList<>();
+				for (int j=0;j<villes.size();j++) {
+					if (matriceAdj[i][j]==true) {
+						if (!verifVoisin(j)) {
+							villePbm.add(j); //Stocke le nom de toutes les villes problématiques pour lesquelles la contrainte ne serait pas respecté
+						}
+					}
+				}
+				if (!villePbm.isEmpty()) {
+					StringBuilder sb = new StringBuilder();
+					sb.append("Si vous enlever la zone de recharge de "+A+", ");
+					for (int m=0;m<villePbm.size();m++) {
+						sb.append(villes.get(villePbm.get(m)).getNom()+" ");
+					}
+					if(villePbm.size()==1) {
+						sb.append("ne respectera plus la contrainte d'accessibilité !");
+					}else {
+						sb.append("ne respecteront plus la constrainte d'accessibilité !");
+					}
+					villes.get(i).ajouterZone(); //Rajoute la zone de recharge que l'on avait temporairement retiré car il est impossible de retirer la zone de A en respectant la contrainte d'accessibilité 
+					throw new IllegalArgumentException(sb.toString());
+				}else {
+					return;
+				}
+			}else {
+				throw new IllegalArgumentException("Les villes voisines de "+A+" ne possédent pas de zone de recharge");
 			}
 		}catch(IllegalArgumentException e ) {
 			System.out.println("Erreur : "+e.getMessage());
 		}
 	}
+	
+	
+	// Permet de vérifier que la ville a une zone de recharge ou qu'au moins une de ses villes voisines en ait une
+	private boolean verifVoisin(int i) {
+		if(villes.get(i).getZone()==true) {
+			return true;
+		}else{
+		for(int j=0;j<villes.size();j++) {
+			if (matriceAdj[i][j]==true) {
+				if(villes.get(j).getZone()==true) {
+					return true;
+				}
+			}
+		}
+		return false;
+		}
+	}
+	
+	public void afficheVillesAvecZone() {
+		StringBuilder sb = new StringBuilder();
+		for (int i=0;i<villes.size();i++) {
+			if(villes.get(i).getZone()) {
+				sb.append(villes.get(i).getNom()+" ");
+			}
+		}
+		System.out.println(sb.toString());
+	}
+	
 }
