@@ -13,17 +13,24 @@ public class Ville {
 		return nom;
 	}
 	
+	public boolean getZone() {
+		return zoneDeRecharge;
+	}
+	
 	public void ajouterZone() {
 		if(zoneDeRecharge) {
 			System.out.println("Il existe déjà une zone de recharge dans la ville "+nom);
-		}else
+		}else {
 			zoneDeRecharge = true;
+		}
 	}
 	
 	public void retirerZone() {
 		if(!zoneDeRecharge) {
 			System.out.println("Il n'existe pas de zone de recharge dans la ville : "+nom);
-		}else
+		}else {
 			zoneDeRecharge = false;
+		}
 	}
 }
+
