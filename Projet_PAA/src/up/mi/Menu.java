@@ -10,10 +10,12 @@ public class Menu {
         do {
         	System.out.println("Entrer le nombre de villes que vous souhaitez ajouté ( doit être compris entre 1 et 26 ) : ");
         	nbrVille = sc.nextInt();
+        	//Verifie que le nombre de ville crée est compris entre 1 et 26.
         	if(nbrVille<1||nbrVille>26) {
         		System.out.println("Le nombre de ville rentré est incorrecte !\n");
         	}
         }while(nbrVille<1||nbrVille>26);
+        
         // Initialisation de l'objet 'Ca' pour gérer les données des villes et des routes
         Ca ca = new Ca(nbrVille);
         // Initialisation du choix
