@@ -12,23 +12,14 @@ public class Ca {
 	
     // Constructeur
 	public Ca(int nbrVille) {
-		try {
-			if(nbrVille<=26) {
-				this.nbrVille = nbrVille;
-				villes = new ArrayList<Ville>();
-				matriceAdj = new boolean[nbrVille][nbrVille];
-				
-				for (int i = 0; i < nbrVille; i++) { //Permet de créer 
-		            Character nomCharVille = (char) ('A' + i);
-		            String nomVille = String.valueOf(nomCharVille);
-		            villes.add(new Ville(nomVille));
-		        }
-			}else {
-				throw new IllegalArgumentException("Vous ne pouvez pas avoir plus de 26 villes !");
-			}
-		}catch(IllegalArgumentException f) {
-			System.out.println("Erreur : "+f.getMessage());
-		}
+		this.nbrVille = nbrVille;
+		villes = new ArrayList<Ville>();
+		matriceAdj = new boolean[nbrVille][nbrVille];
+		for (int i = 0; i < nbrVille; i++) { //Permet de créer 
+            Character nomCharVille = (char) ('A' + i);
+            String nomVille = String.valueOf(nomCharVille);
+            villes.add(new Ville(nomVille));
+        	}
 	}
 	
 	/* Pour la partie 2
