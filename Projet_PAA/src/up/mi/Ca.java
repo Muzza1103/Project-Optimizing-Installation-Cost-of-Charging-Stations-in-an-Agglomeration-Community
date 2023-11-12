@@ -15,7 +15,7 @@ public class Ca {
 		this.nbrVille = nbrVille;
 		villes = new ArrayList<Ville>();
 		matriceAdj = new boolean[nbrVille][nbrVille];
-		for (int i = 0; i < nbrVille; i++) { //Permet de créer 
+		for (int i = 0; i < nbrVille; i++) { //Permet de créer les villes dans l'ordre de l'alphabet
            		Character nomCharVille = (char) ('A' + i);
             		String nomVille = String.valueOf(nomCharVille);
             		villes.add(new Ville(nomVille));
