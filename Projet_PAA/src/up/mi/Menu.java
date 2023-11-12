@@ -6,11 +6,17 @@ public class Menu {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Entrer le nombre de villes que vous souhaitez ajouté ( doit être inférieur à 26 ) : ");
-        int nbrVille = sc.nextInt();
+        int nbrVille;
+        do {
+        	System.out.println("Entrer le nombre de villes que vous souhaitez ajouté ( doit être compris entre 1 et 26 ) : ");
+        	nbrVille = sc.nextInt();
+        	if(nbrVille<1||nbrVille>26) {
+        		System.out.println("Le nombre de ville rentré est incorrecte !\n");
+        	}
+        }while(nbrVille<1||nbrVille>26);
         // Initialisation de l'objet 'Ca' pour gérer les données des villes et des routes
         Ca ca = new Ca(nbrVille);
-     // Initialisation du choix
+        // Initialisation du choix
         int choix = 0;
 
         do {
