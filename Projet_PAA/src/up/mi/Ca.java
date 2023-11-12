@@ -16,9 +16,9 @@ public class Ca {
 		villes = new ArrayList<Ville>();
 		matriceAdj = new boolean[nbrVille][nbrVille];
 		for (int i = 0; i < nbrVille; i++) { //Permet de créer 
-            Character nomCharVille = (char) ('A' + i);
-            String nomVille = String.valueOf(nomCharVille);
-            villes.add(new Ville(nomVille));
+           		Character nomCharVille = (char) ('A' + i);
+            		String nomVille = String.valueOf(nomCharVille);
+            		villes.add(new Ville(nomVille));
         	}
 	}
 	
