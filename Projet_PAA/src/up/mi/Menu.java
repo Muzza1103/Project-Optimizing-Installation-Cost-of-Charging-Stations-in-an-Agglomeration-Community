@@ -10,14 +10,18 @@ public class Menu {
         do {
         	System.out.println("Entrer le nombre de villes que vous souhaitez ajouté ( doit être compris entre 1 et 26 ) : ");
         	nbrVille = sc.nextInt();
-        	//Verifie que le nombre de ville crée est compris entre 1 et 26.
         	if(nbrVille<1||nbrVille>26) {
         		System.out.println("Le nombre de ville rentré est incorrecte !\n");
         	}
         }while(nbrVille<1||nbrVille>26);
-        
-        // Initialisation de l'objet 'Ca' pour gérer les données des villes et des routes
+    	// Initialisation de l'objet 'Ca' pour gérer les données des villes et des routes
         Ca ca = new Ca(nbrVille);
+        System.out.print("Villes ajoutées : ");
+        for (int i = 0; i < nbrVille; i++) { //Pour la partie 1, permet de directement créer nbrVille villes en suivant l'ordre de l'alphabet
+            Character nomCharVille = (char) ('A' + i);
+            String nomVille = String.valueOf(nomCharVille);
+            ca.ajouterVille(nomVille);
+        }
         // Initialisation du choix
         int choix = 0;
 
@@ -63,7 +67,6 @@ public class Menu {
             	case 1:
             		System.out.println("\nEntrez le nom de la ville où vous souhaitez ajouter une borne de recharge.");
             		String ajout = sc.nextLine().toUpperCase(); //Affin d'eviter les pb d'oublie de maj ect...
-                    
                 
             		// Appel de la méthode pour ajouter une zone de recharge dans une ville
             		ca.ajouterZoneDeRecharge(ajout);
