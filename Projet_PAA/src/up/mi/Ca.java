@@ -172,5 +172,10 @@ public class Ca {
 		}
 		System.out.println(sb.toString());
 	}
+	public void retirerZonesDeRechargeDeToutesLesVilles() {
+        for (Ville ville : villes) {
+            ville.retirerZone();
+        }
 	
+}
 }
