@@ -17,7 +17,7 @@ public class Ca {
 		matriceAdj = new boolean[nbrVille][nbrVille];
 	}
 	
-	// Fonction qui permet d'ajouter d'une ville si elle n'existe pas déjà
+	// Fonction qui permet d'ajouter une ville si elle n'existe pas déjà
 	public void ajouterVille(String nom){
 		try {
 			for (Ville v : villes) {
