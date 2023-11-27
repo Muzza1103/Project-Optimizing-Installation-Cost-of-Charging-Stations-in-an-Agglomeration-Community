@@ -17,7 +17,7 @@ public class Ca {
 		matriceAdj = new boolean[nbrVille][nbrVille];
 	}
 	
-	// Fonction qui permet d'ajouter une ville si elle n'existe pas déjà
+	// Fonction qui permet d'ajouter d'une ville si elle n'existe pas déjà
 	public void ajouterVille(String nom){
 		try {
 			for (Ville v : villes) {
@@ -32,9 +32,9 @@ public class Ca {
 				throw new IndexOutOfBoundsException("Le nombre maximum de villes est atteint (" + nbrVille + "). Impossible d'ajouter : " + nom);
 			}
 		}catch(IndexOutOfBoundsException e){
-			System.out.println("Erreur : "+e.getMessage());
+			System.out.println("\u001B[31m\nErreur : "+e.getMessage()+"\u001B[0m");
 		}catch(IllegalArgumentException f) {
-			System.out.println("Erreur : "+f.getMessage());
+			System.out.println("\u001B[31m\nErreur : "+f.getMessage()+"\u001B[0m");
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class Ca {
 				throw new IllegalArgumentException(A+" et "+B+" sont la même ville, vous ne pouvez pas créer de route entre eux !");
 			}
 		}catch(IllegalArgumentException e ) {
-			System.out.println("Erreur : "+e.getMessage());
+			System.out.println("\u001B[31mErreur : "+e.getMessage()+"\u001B[0m");
 		}
 	}
 	// Permet d'ajouter une zone de recharge dans une ville si elle n'existe pas déjà
@@ -83,7 +83,7 @@ public class Ca {
 				throw new IllegalArgumentException("La ville "+A+" n'existe pas !");
 			}
 		}catch(IllegalArgumentException e ) {
-			System.out.println("Erreur : "+e.getMessage());
+			System.out.println("\u001B[31mErreur : "+e.getMessage()+"\u001B[0m");
 		}
 	}
 	
@@ -130,7 +130,7 @@ public class Ca {
 				throw new IllegalArgumentException("Les villes voisines de "+A+" ne possédent pas de zone de recharge");
 			}
 		}catch(IllegalArgumentException e ) {
-			System.out.println("Erreur : "+e.getMessage());
+			System.out.println("\u001B[31mErreur : "+e.getMessage()+"\u001B[0m");
 		}
 	}
 	
@@ -149,6 +149,30 @@ public class Ca {
 		}
 		return false;
 		}
+	}
+	
+	public boolean verifConditionAcc() {
+		List<Integer> villePbm = new ArrayList<>();
+		for( int i=0;i<villes.size();i++) {
+			if(verifVoisin(i)==false) {
+				villePbm.add(i);
+			}
+		}
+		if (!villePbm.isEmpty()) { //Vérifie si il y a des villes problématiques et les renvoie dans l'exception
+			StringBuilder sb = new StringBuilder();
+			sb.append("Erreur : Avec la configuration de zones de recharge présente sur le fichier, ");
+			for (int m=0;m<villePbm.size();m++) {
+				sb.append(villes.get(villePbm.get(m)).getNom()+" ");
+			}
+			if(villePbm.size()==1) {
+				sb.append("ne respectera pas la contrainte d'accessibilité !");
+			}else {
+				sb.append("ne respecteront pas la constrainte d'accessibilité !");
+			}
+			System.err.println(sb.toString());
+			return false;
+		}
+		return true;
 	}
 	
 	// Permet d'afficher les villes possédant une zone de recharge
@@ -172,10 +196,18 @@ public class Ca {
 		}
 		System.out.println(sb.toString());
 	}
+	
 	public void retirerZonesDeRechargeDeToutesLesVilles() {
         for (Ville ville : villes) {
             ville.retirerZone();
         }
+	}
 	
-}
+	public void ajouterZonesDeRechargeDeToutesLesVilles() {
+		for (Ville ville : villes) {
+			if(ville.getZone()==false) {
+				ville.ajouterZone();
+			}
+		}
+	}
 }

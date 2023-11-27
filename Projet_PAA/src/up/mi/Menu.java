@@ -19,7 +19,7 @@ public class Menu {
 
         int choix0;
         Scanner sc = new Scanner(System.in);
-
+        Ca ca;
         do {
             menu0();
             choix0 = sc.nextInt();
@@ -28,50 +28,16 @@ public class Menu {
             switch (choix0) {
                 case 1: {
                     // Traitement pour l'option 1
-                    int nbrVille;
-                    do {
-                        System.out.println("Entrer le nombre de villes que vous souhaitez ajouter (doit être compris entre 1 et 26): ");
-                        nbrVille = sc.nextInt();
-                        if (nbrVille < 1 || nbrVille > 26) {
-                            System.out.println("Le nombre de ville rentré est incorrecte !\n");
-                        }
-                    } while (nbrVille < 1 || nbrVille > 26);
-
-                    // Initialisation de l'objet 'Ca' pour gérer les données des villes et des routes
-                    Ca ca = new Ca(nbrVille);
-                    System.out.print("Villes ajoutées : ");
-                    for (int i = 0; i < nbrVille; i++) {
-                        Character nomCharVille = (char) ('A' + i);
-                        String nomVille = String.valueOf(nomCharVille);
-                        ca.ajouterVille(nomVille);
-                    }
-
-                    // Initialisation du choix
-                    int choix = 0;
-
+                	ca = traitementFichierTexte(filePath);
+                	if(!ca.verifConditionAcc()) {
+                		System.out.println("On repart de la solution naïve ( toutes les villes ont des zones de recharge )");
+                		ca.ajouterZonesDeRechargeDeToutesLesVilles();
+                	}
+                	
+                	int choix = 0;
+                	
                     do {
                         menu1();
-
-                        choix = sc.nextInt();
-                        sc.nextLine();
-
-                        switch (choix) {
-                            case 1:
-                                System.out.println("\nEntrez le nom de la première ville à relier.");
-                                String a = sc.nextLine().toUpperCase();
-                                System.out.println("Entrez le nom de la seconde ville à relier");
-                                String b = sc.nextLine().toUpperCase();
-                                ca.ajouterRoute(a, b);
-                                break;
-                            case 2:
-                                break;
-                            default:
-                                System.out.println("Erreur : l'option " + choix + " n'est pas valable.");
-                        }
-                    } while (choix != 2);
-
-                    do {
-                        menu2();
                         System.out.println("\nListe des villes possédant des zones de recharge :");
                         ca.afficheVillesAvecZone();
                         System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
@@ -103,53 +69,8 @@ public class Menu {
                 }
                 case 2: {
                     // Traitement pour l'option 2
-                    boolean aDejaRetireZonesDeRecharge = false;
-
-                    try {
-                        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-                        String line;
-                        int nbrVille = 0;
-
-                        while ((line = reader.readLine()).substring(0, 5).equals("ville")) {
-                            nbrVille++;
-                        }
-                        System.out.println("La communauté contient " + nbrVille + " villes :");
-                        Ca ca = new Ca(nbrVille);
-                        reader.close();
-
-                        BufferedReader reader2 = new BufferedReader(new FileReader(filePath));
-                        String line2;
-                        while ((line2 = reader2.readLine()) != null) {
-                            if (line2.substring(0, 5).equals("ville")) {
-                                char character = line2.charAt(6);
-                                String ville = Character.toString(character);
-                                ca.ajouterVille(ville);
-                            } else if (line2.substring(0, 5).equals("route")) {
-                                char dep = line2.charAt(6);
-                                char arr = line2.charAt(8);
-                                String départ = Character.toString(dep);
-                                String arrivée = Character.toString(arr);
-                                System.out.println("\n" + départ + "---" + arrivée);
-                                ca.ajouterRoute(départ, arrivée);
-                            } else if (line2.substring(0, 8).equals("recharge")) {
-                                if (!aDejaRetireZonesDeRecharge) {
-                                    ca.retirerZonesDeRechargeDeToutesLesVilles();
-                                    aDejaRetireZonesDeRecharge = true;
-                                    System.out.println("les villes avec recharge sont:");
-                                }
-                                char rec = line2.charAt(9);
-                                String recharge = Character.toString(rec);
-                                ca.ajouterZoneDeRecharge(recharge);
-                                ca.afficheVillesAvecZone();
-                            } else {
-                                System.err.println("\u001B[31mVous avez une erreur dans votre fichier.\u001B[0m");
-                                break;
-                            }
-                        }
-                        reader2.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                	ca = traitementFichierTexte(filePath);
+                	
 
                     // Sortir de la boucle principale après le traitement de l'option 2
                     break;
@@ -180,13 +101,63 @@ public class Menu {
     }
 
     private static void menu1() {
-        System.out.println("\n1 - Ajouter une route;");
-        System.out.println("2 - Fin.");
-    }
-
-    private static void menu2() {
         System.out.println("\n1 - Ajouter une zone de recharge;");
         System.out.println("2 - Retirer une zone de recharge;");
         System.out.println("3 - Fin.");
     }
+    
+    private static Ca traitementFichierTexte(String filePath) {
+    	boolean aDejaRetireZonesDeRecharge = false;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            String line;
+            int nbrVille = 0;
+
+            while ((line = reader.readLine()).substring(0, 5).equals("ville")) {
+                nbrVille++;
+            }
+            System.out.println("La communauté contient " + nbrVille + " villes :");
+            Ca ca = new Ca(nbrVille);
+            reader.close();
+
+            BufferedReader reader2 = new BufferedReader(new FileReader(filePath));
+            String line2;
+            while ((line2 = reader2.readLine()) != null) {
+                if (line2.substring(0, 5).equals("ville")) {
+                	int indexFin = line2.indexOf(')');
+                    String ville = line2.substring(6,indexFin);
+                    ca.ajouterVille(ville);
+                } else if (line2.substring(0, 5).equals("route")) {
+                	int indexSeparateur = line2.indexOf(',');
+                    String depart = line2.substring(6,indexSeparateur);
+                    int indexFin = line2.indexOf(')');
+                    String arrivee = line2.substring(indexSeparateur+1,indexFin);
+                    System.out.println("\n" + depart + "---" + arrivee);
+                    ca.ajouterRoute(depart, arrivee);
+                } else if (line2.substring(0, 8).equals("recharge")) {
+                    if (!aDejaRetireZonesDeRecharge) {
+                        ca.retirerZonesDeRechargeDeToutesLesVilles();
+                        aDejaRetireZonesDeRecharge = true;
+                        System.out.println("les villes avec recharge sont:");
+                    }
+                    int indexFin = line2.indexOf(')');
+                    String recharge = line2.substring(9,indexFin);
+                    ca.ajouterZoneDeRecharge(recharge);
+                } else {
+                    System.err.println("\u001B[31mVous avez une erreur dans votre fichier.\u001B[0m");
+                    break;
+                }
+            }
+            reader2.close();
+            ca.afficheVillesAvecZone();
+            return ca;
+        } catch (IOException e) {
+        	System.err.println("\u001B[31mVous avez une erreur dans votre fichier.\u001B[0m");
+            e.printStackTrace();
+            System.exit(1); // A changer potentiellement, quitte le programme de force
+            return null;
+        }
+    }
+    
 }
