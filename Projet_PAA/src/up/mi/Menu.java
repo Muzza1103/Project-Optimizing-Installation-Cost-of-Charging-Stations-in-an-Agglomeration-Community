@@ -116,6 +116,7 @@ public class Menu {
             		System.out.println("Entrez le chemin d'acces du fichier de sauvegarde");
                 	save=sc.next();
                     sauvgarde(save, ca);
+            		System.out.println("Sauvegarde réussie !");
                     break;
                 }
                 case 4: {
