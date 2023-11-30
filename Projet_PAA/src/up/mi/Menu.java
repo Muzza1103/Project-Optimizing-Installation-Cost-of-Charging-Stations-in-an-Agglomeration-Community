@@ -115,7 +115,7 @@ public class Menu {
                 	String save;
             		System.out.println("Entrez le chemin d'acces du fichier de sauvegarde");
                 	save=sc.next();
-                    sauvgarde(save, ca);
+                    sauvegarde(save, ca);
             		System.out.println("Sauvegarde réussie !");
                     break;
                 }
@@ -249,9 +249,8 @@ public class Menu {
 		}
 	}
     
-
-
-        private static void sauvgarde(String fileName, Ca ca) {
+    // methode de Sauvegarde 
+    private static void sauvegarde(String fileName, Ca ca) {
             try {
                 FileWriter fileWriter = new FileWriter(fileName);
                 List<Ville> villes = ca.getVilles();
