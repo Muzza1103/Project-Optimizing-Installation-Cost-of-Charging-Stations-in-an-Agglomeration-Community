@@ -32,5 +32,11 @@ public class Ville {
 			zoneDeRecharge = false;
 		}
 	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("ville(" + nom + ").");
+       return sb.toString();
+       }
 }
 

@@ -23,4 +23,3 @@ route(H,J).
 route(H,K).
 recharge(B).
 recharge(E).
-recharge(H).

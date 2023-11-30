@@ -2,6 +2,7 @@ package up.mi;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class Menu {
 
         int choix0;
         Scanner sc = new Scanner(System.in);
-        Ca ca;
+        Ca ca =null;
         do {
             menu0();
             choix0 = sc.nextInt();
@@ -111,7 +112,10 @@ public class Menu {
                     break;
                 }
                 case 3: {
-                    // Traitement pour l'option de sauvegarde
+                	String save;
+            		System.out.println("Entrez le chemin d'acces du fichier de sauvegarde");
+                	save=sc.next();
+                    sauvgarde(save, ca);
                     break;
                 }
                 case 4: {
@@ -195,6 +199,8 @@ public class Menu {
         }
     }
     
+    
+    //Algo du sujet 
     private static Ca resolutionAlgo2(Ca ca,int k) {
     	int i=0;
     	int scoreCourant = ca.scoreCa();
@@ -219,26 +225,56 @@ public class Menu {
     	return ca;
     }
     
+    
+    // Algo perso
     private static void resolutionAutomatique(Ca ca) {
-    	List<Ville> villes = ca.getVilles();
-    	boolean [][] matriceAdj = ca.getMatrice();
-		int [] listeVoisin = new int[villes.size()];
+    	List<Ville> villes = ca.getVilles(); // Creer une liste de ville 
+    	boolean [][] matriceAdj = ca.getMatrice();// Cree une matrice qui represente les route 
+		int [] listeVoisin = new int[villes.size()]; // Cree un tableau avec la taille des villes
 		for (int i=0;i<villes.size();i++) {
 			for (int j=0;j<villes.size();j++) {
-				if (matriceAdj[i][j]==true) {
-					listeVoisin[i]++;
+				if (matriceAdj[i][j]==true) { // si une route existe alors il est un voison, donc il l'ajoute dans le tableau
+					listeVoisin[i]++; // ajoute dans le tab
 				}
 			}
 		}
 		for(int i=1;i<villes.size();i++) {
 			for (int j=0;j<villes.size();j++) {
-				if (listeVoisin[j]==i && villes.get(j).getZone()== true) {
+				if (listeVoisin[j]==i && villes.get(j).getZone()== true) { // on prend les villes qui possedent le moins de voisin jusqu'au ville qui possedent le plus de voisin (odre croissant), et une ville qui posssede une zone de recharge
 					System.out.println("Retire la zone de "+villes.get(j).getNom());
-					ca.retirerZoneDeRecharge(villes.get(j).getNom());
+					ca.retirerZoneDeRecharge(villes.get(j).getNom());// on retire la zone de recharge sachant que la methode doit respecter la contrainte d'accessibilité definit auparavant
 				}
 			}
 		}
 	}
     
-    
+
+
+        private static void sauvgarde(String fileName, Ca ca) {
+            try {
+                FileWriter fileWriter = new FileWriter(fileName);
+                List<Ville> villes = ca.getVilles();
+                boolean [][] route = ca.getMatrice();
+                for (Ville ville : villes) {
+                    fileWriter.write(ville.toString() + "\n");
+                }
+                for (int i=0;i<villes.size();i++) {
+                	for (int j=0;j<=i;j++) {
+                		if (route[i][j]==true) {
+                            fileWriter.write("route("+villes.get(i).getNom()+","+villes.get(j).getNom()+")."+ "\n");
+
+                		}
+                	}
+                }
+                for (int i=0;i<villes.size();i++) {
+                	if (villes.get(i).getZone()==true) {
+                		fileWriter.write("recharge("+villes.get(i).getNom()+")."+"\n");
+                	}
+                }
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 }
+
