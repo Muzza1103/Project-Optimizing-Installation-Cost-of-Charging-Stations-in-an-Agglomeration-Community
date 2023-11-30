@@ -252,6 +252,9 @@ public class Menu {
     // methode de Sauvegarde 
     private static void sauvegarde(String fileName, Ca ca) {
             try {
+		if(ca == null) {
+            		throw new IOException("La communauté d'agglomération n'a pas été chargé !");
+            	}
                 FileWriter fileWriter = new FileWriter(fileName);
                 List<Ville> villes = ca.getVilles();
                 boolean [][] route = ca.getMatrice();
