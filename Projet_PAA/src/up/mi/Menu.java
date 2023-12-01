@@ -1,9 +1,14 @@
 package up.mi;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Random;
@@ -16,7 +21,6 @@ public class Menu {
             System.err.println("\u001B[31mVeuillez spécifier le chemin du fichier en argument.\u001B[0m");
             return;
         }
-
         // Récupérer le chemin du fichier depuis les arguments
         String filePath = args[0];
 
@@ -141,9 +145,15 @@ public class Menu {
     }
 
     private static void menu1() {
-        System.out.println("\n1 - Ajouter une zone de recharge;");
-        System.out.println("2 - Retirer une zone de recharge;");
+        System.out.println("\n1 - Ajouter une zone de recharge");
+        System.out.println("2 - Retirer une zone de recharge");
         System.out.println("3 - Fin.");
+    }
+    
+    // menu de sauvegarde si fichier existe deja 
+    private static void menu2() {
+        System.out.println("\n1 - Remplacer le fichier existant");
+        System.out.println("2 - Faire une copie");
     }
     
     private static Ca traitementFichierTexte(String filePath) {
@@ -252,10 +262,46 @@ public class Menu {
     // methode de Sauvegarde 
     private static void sauvegarde(String fileName, Ca ca) {
             try {
+        // Vérifie si l'instance de la communauté d'agglomération est nulle
 		if(ca == null) {
+            // Lance une exception si la communauté d'agglomération n'est pas chargée
             		throw new IOException("La communauté d'agglomération n'a pas été chargé !");
             	}
-                FileWriter fileWriter = new FileWriter(fileName);
+		// Crée un objet File en utilisant le nom de fichier spécifié
+        File file = new File(fileName);
+		// Vérifier si le fichier existe déja
+        if (file.exists()) {
+        	Scanner sc = new Scanner(System.in);
+        	int choix;
+        	 
+        	//Afichage du menu
+        	do {
+        		 menu2();
+        		 //Choix Utilisateur
+        		 choix = sc.nextInt();
+        		 sc.nextLine();
+        	switch(choix) {
+        	
+        	// remplacer le fichier existant.
+        	case 1:{
+        		ecraserFichier(fileName,ca);
+                
+        	}break;
+        	
+        	//Faire une copie du fichier existant et l'enregistrer.
+        	case 2:{
+        		copieFichier(fileName);
+        	}break;
+        	
+        	default:
+                System.out.println("Erreur : l'option " + choix + " n'est pas valable.");
+        	
+        	}
+        	}while(choix!=1&&choix!=2);
+        	 
+        }
+        // Enregistre un fichier.
+        FileWriter fileWriter = new FileWriter(fileName);
                 List<Ville> villes = ca.getVilles();
                 boolean [][] route = ca.getMatrice();
                 for (Ville ville : villes) {
@@ -279,5 +325,50 @@ public class Menu {
                 e.printStackTrace();
             }
         }
+    
+ // Méthode pour sauvegarder les données dans un fichier
+    private static void ecraserFichier(String fileName, Ca ca) throws IOException {
+        // Initialise un FileWriter pour écrire dans le fichier spécifié
+        FileWriter fileWriter = new FileWriter(fileName);
+        // Récupère les informations sur les villes et les routes de la communauté d'agglomération
+        List<Ville> villes = ca.getVilles();
+        boolean[][] route = ca.getMatrice();
+
+        // Écrit les informations sur les villes dans le fichier
+        for (Ville ville : villes) {
+            fileWriter.write(ville.toString() + "\n");
+        }
+
+        // Écrit les informations sur les routes dans le fichier
+        for (int i = 0; i < villes.size(); i++) {
+            for (int j = 0; j <= i; j++) {
+                if (route[i][j]) {
+                    fileWriter.write("route(" + villes.get(i).getNom() + "," + villes.get(j).getNom() + ")." + "\n");
+                }
+            }
+        }
+
+        // Écrit les informations sur les points de recharge dans le fichier
+        for (Ville ville : villes) {
+            if (ville.getZone()) {
+                fileWriter.write("recharge(" + ville.getNom() + ")." + "\n");
+            }
+        }
+
+        // Ferme le FileWriter pour libérer les ressources
+        fileWriter.close();
+    }
+
+    // Méthode pour créer une copie du fichier existant avec une date ajoutée au nom du fichier
+    private static void copieFichier(String fileName) throws IOException {
+        // Obtient la date actuelle sous forme de chaîne
+        String dateString = new SimpleDateFormat("HH:mm_dd-MM-yyyy").format(new Date());
+        // Crée un objet File pour le fichier d'origine
+        File file = new File(fileName);
+        // Crée un objet File pour la nouvelle copie du fichier
+        File tempFile = new File(fileName + "_Copy_" + dateString);
+        // Effectue la copie du fichier d'origine vers la nouvelle copie avec la date ajoutée au nom
+        Files.copy(file.toPath(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
 }
 
