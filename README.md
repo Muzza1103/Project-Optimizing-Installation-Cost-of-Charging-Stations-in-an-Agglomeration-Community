@@ -1,6 +1,6 @@
 # Projet : Bornes de recharge électrique (Projet de PAA)
 
-[![forthebadge]([http://forthebadge.com/images/badges/built-with-love.svg](https://forthebadge.com/images/badges/made-with-java.svg))](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](http://forthebadge.com)
+([http://forthebadge.com/images/badges/built-with-love.svg](https://forthebadge.com/images/badges/made-with-java.svg))](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](http://forthebadge.com)
 
 Ce projet, réalisé dans le cadre du cours de Programmation Avancée et Application en L3 Informatique, vise à développer un logiciel permettant de résoudre le problème de placement optimal de bornes de recharge pour véhicules électriques au sein d'une communauté d'agglomération
 ## Pour commencer
