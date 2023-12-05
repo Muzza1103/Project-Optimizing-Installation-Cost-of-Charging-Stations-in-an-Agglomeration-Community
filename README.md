@@ -22,6 +22,10 @@ installer le projet sur votre machine, et assurer vous de l'emplacement du fichi
 
 pour commencer, placer vous dans le fichier parent de src et bin
 
+le fichier Main se trouve dans la classe Menu.java, accessible par le chemin:
+
+" PROJET_PAA/Projet_PAA/src/up/mi/Menu.java "
+
 -compilation:
 
 javac -d bin src/up/mi/*.java
@@ -33,6 +37,20 @@ java -cp bin up.mi.Menu ville.txt
 précision:
 
 il y a un fichier d'exemple fourni est placé dans le bon répertoire pour ne pas avoir a préciser son chemin, néanmoins il est possible d'utiliser n'importe quel fichier en précisant son chemin absolu
+
+## Fonctionnalités
+
+le projet permet de:
+
+représenter les villes d’une communauté d’agglomération, et les routes qui les relient
+
+simuler la construction de parkings équipés de bornes de recharge dans les villes de la
+communauté
+
+s’assurer que la contrainte d’accessibilité est respectée
+
+calculer le coût d’une solution (le nombre zones de recharge à construire) et de mnimiser ce coût
+
 
 ## Fabriqué avec
 
