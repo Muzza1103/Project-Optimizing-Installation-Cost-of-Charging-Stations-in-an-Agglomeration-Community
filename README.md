@@ -35,18 +35,13 @@ il y a un fichier d'exemple fourni est placé dans le bon répertoire pour ne pa
 * [VsCode](https://code.visualstudio.com/) - Editeur de textes
 
 
-
-## Versions
-Listez les versions ici 
-
-Liste des versions : [Cliquer pour afficher](https://github.com/Muzza1103/PROJET_PAA/tags)
-
 ## Auteurs
 Zaidi Rayan
+
 Mougamadou Muzzammil
+
 Guelai Adam
 
-Lisez la liste des [contributeurs](https://github.com/Muzza1103/PROJET_PAA/contributors) pour voir qui à aidé au projet !
 
 
 
