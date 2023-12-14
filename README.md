@@ -56,6 +56,7 @@ calculer le coût d’une solution (le nombre zones de recharge à construire) e
 
 
 * [VsCode](https://code.visualstudio.com/) - Editeur de textes
+* [Eclipse](https://eclipseide.org) - Editeur de textes
 
 
 ## Auteurs
