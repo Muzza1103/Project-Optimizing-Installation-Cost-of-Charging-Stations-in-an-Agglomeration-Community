@@ -21,6 +21,7 @@ public class Menu {
             System.err.println("\u001B[31mVeuillez spécifier le chemin du fichier en argument.\u001B[0m");
             return;
         }
+
         // Récupérer le chemin du fichier depuis les arguments
         String filePath = args[0];
 
@@ -124,7 +125,12 @@ public class Menu {
                     break;
                 }
                 case 4: {
-                    // Sortir du programme pour l'option 4
+                	launchJavaFX(ca);
+                    // Afichage javaFX.
+                    break;
+                }
+                case 5: {
+                    // Sortir du programme pour l'option 5
                     break;
                 }
                 default: {
@@ -141,16 +147,16 @@ public class Menu {
         System.out.println("\n1 - résoudre manuellement");
         System.out.println("2 - résoudre automatiquement");
         System.out.println("3 - sauvegarder ");
-        System.out.println("4 - Fin");
+        System.out.println("4 - Affichage graphique");
+        System.out.println("5 - Fin");
     }
 
     private static void menu1() {
-        System.out.println("\n1 - Ajouter une zone de recharge");
-        System.out.println("2 - Retirer une zone de recharge");
+        System.out.println("\n1 - Ajouter une zone de recharge;");
+        System.out.println("2 - Retirer une zone de recharge;");
         System.out.println("3 - Fin.");
     }
-    
-    // menu de sauvegarde si fichier existe deja 
+ // menu de sauvegarde si fichier existe deja 
     private static void menu2() {
         System.out.println("\n1 - Remplacer le fichier existant");
         System.out.println("2 - Faire une copie");
@@ -259,7 +265,14 @@ public class Menu {
 		}
 	}
     
-    // methode de Sauvegarde 
+    // Methode pour l'affichage graphique
+    private static void launchJavaFX(Ca ca) {
+        VilleRepresentation.setCa(ca); // Ajoutez cette ligne pour initialiser Ca dans VilleRepresentation
+        VilleRepresentation.launch(VilleRepresentation.class);
+    }
+    
+
+ // methode de Sauvegarde 
     private static void sauvegarde(String fileName, Ca ca) {
             try {
         // Vérifie si l'instance de la communauté d'agglomération est nulle
@@ -371,4 +384,3 @@ public class Menu {
         Files.copy(file.toPath(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 }
-
