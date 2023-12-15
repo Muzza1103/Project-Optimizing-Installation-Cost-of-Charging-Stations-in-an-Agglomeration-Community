@@ -8,6 +8,7 @@ Ce projet, réalisé dans le cadre du cours de Programmation Avancée et Applica
 Ce qu'il est requis pour commencer avec votre projet...
 
 - java17
+- JavaFX (Optionnel)
 
 ### Installation
 
