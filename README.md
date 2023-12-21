@@ -18,9 +18,13 @@ it does the following:
 
 
 -the first one permits to solve the problem manually.
+
 -the second to solve it automatically through implemented algorithms.
+
 -the third to save the solution.
+
 -the fourth to represent it graphically.
+
 -the fifth to stop the program.
 
 
