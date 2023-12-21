@@ -18,9 +18,9 @@ it does the following:
 
 ## This is what our program looks like
 ### during the execution:
-![Sample Image](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/bash.png)
+![Execution of the program](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/bash.png)
 ### for option number 4, how it represents the solution graphically:
-![Sample Image](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/javafx.png)
+![Graphic representation](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/javafx.png)
 
 # How to install and run this project
 
@@ -30,17 +30,31 @@ Then, clone the repository or download it and unzip it at the location of your c
 
 After that, if you want to use it directly from the bash terminal on linux follow these steps:
 
-    *Start by compiling it with the following command : "javac --module-path [your/path/to/sdk]/lib --add-modules javafx.controls,javafx.fxml -d bin [path/to/your/project]/src/up/mi/*.java"
-    *you can run it with: "java --module-path [your/path/to/sdk]/lib --add-modules javafx.controls,javafx.fxml -cp bin up.mi.Menu [path/to/your/file]"
+   Start by compiling it with the following command : 
 
 
-on windows cmd or powerShell:
-    *Start by compiling it with the following command : "javac --module-path [your\path\to\sdk]\lib --add-modules javafx.controls,javafx.fxml -d bin [path\to\your\project]\src\up\mi\*.java"
-    *you can run it with: "java --module-path [your\path\to\sdk]\lib --add-modules javafx.controls,javafx.fxml -cp bin up.mi.Menu [path\to\your\file]"
+    "javac --module-path [your/path/to/sdk]/lib --add-modules javafx.controls,javafx.fxml -d bin [path/to/your/project]/src/up/mi/*.java"
+    
+   *you can run it with: 
+    
+    "java --module-path [your/path/to/sdk]/lib --add-modules javafx.controls,javafx.fxml -cp bin up.mi.Menu [path/to/your/file]"      
+
+    
+   on windows cmd or powerShell:
+
+   Start by compiling it with the following command : 
+    
+    "javac --module-path [your\path\to\sdk]\lib --add-modules javafx.controls,javafx.fxml -d bin [path\to\your\project]\src\up\mi\*.java"
+    
+   you can run it with:
+
+
+    "java --module-path [your\path\to\sdk]\lib --add-modules javafx.controls,javafx.fxml -cp bin up.mi.Menu [path\to\your\file]"
 
 
 **notice that you can use just the name of the file if you place it in the same level containing src and bin folders
-*feel free to try the different options of your program and enjoy !
+
+#### feel free to try the different options of your program and enjoy !
 
 
 
