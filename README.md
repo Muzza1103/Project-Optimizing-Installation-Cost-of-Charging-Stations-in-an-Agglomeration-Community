@@ -5,10 +5,18 @@
 
 
 This project, fully functional, was carried out as a part of our third licence year in CS for the Advanced Programming and Applications course.
-The program solves and displays, using different algorithms, what could be the minimum number of charging stations needed for a community of agglomerations, for each city to have one or to be directly connected to a city possessing one.
+It employs various algorithms to solve and visualize the optimal placement of charging stations in urban agglomerations. The primary goal is to determine the minimum number of charging stations required to ensure that each city within the community either has a charging station or is directly connected to a city that possesses one. This forward-looking project aligns with the current environmental concerns and the imperative to embrace electric solutions for sustainable and cost-effective urban transportation.
+
+
 it does the following:
+
+
 *takes a user's file as an argument that contains a CA with or without a solution (if the file doesn't contain any, using a standard one to begin with) for the placement of charging stations.
+
+
 *the progam proposes to the user an interface with multiple choices:
+
+
 -the first one permits to solve the problem manually.
 -the second to solve it automatically through implemented algorithms.
 -the third to save the solution.
