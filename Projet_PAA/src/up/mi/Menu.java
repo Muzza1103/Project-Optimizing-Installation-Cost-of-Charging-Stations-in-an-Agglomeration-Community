@@ -127,10 +127,10 @@ public class Menu {
             	}
                 else{
                     String save;
-            		System.out.println("Entrez le chemin d'acces du fichier de sauvegarde");
+            		System.out.println("Entrez le chemin d'accès où vous voulez sauvegarder votre fichier :");
                 	save=sc.next();
                     sauvegarde(save, ca);
-                    System.out.println("\u001B[32mLa sauvegarde a réussi !\u001B[0m"); // Affiche en vert 
+                    System.out.println("\u001B[32mLa sauvegarde à réussi !\u001B[0m"); // Affiche en vert 
                     break;}
                 }
                 case 4: {
