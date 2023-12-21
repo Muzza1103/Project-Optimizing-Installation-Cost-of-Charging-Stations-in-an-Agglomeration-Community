@@ -45,7 +45,7 @@ public class Menu {
                 	
                 	int choix = 0;
                 	
-                    do {
+                    do { 
                         menu1();
                         System.out.println("\nListe des villes possédant des zones de recharge :");
                         ca.afficheVillesAvecZone();
@@ -85,11 +85,12 @@ public class Menu {
                 	}
                 	System.out.println("Cette communauté d'agglomération posséde "+ca.scoreCa()+" zones de recharges\n");
                 	int choix;
-                	System.out.println("Voulez vous appliquer l'algo2 du sujet (1) ou appliquer un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
+                	System.out.println("Voulez vous appliquer l'algo n°2 du sujet (1) ou appliquer notre nouvel algo ? (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
                 	choix = sc.nextInt();
                     sc.nextLine();
                     switch(choix) {
-                    	case 1:
+                    	//Algo sujet 
+                    case 1:
                     		System.out.println("Début de la résolution automatique\n");
                     		ca=resolutionAlgo2(ca,ca.getNbrVille());
                         	System.out.println("\nFin de la résolution automatique\n");
@@ -99,6 +100,8 @@ public class Menu {
                             System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
                             ca.afficheVillesSansZone();
                             break;
+                            
+                            //Algo perso
                     	case 2:
                     		System.out.println("Début de la résolution automatique\n");
                     		resolutionAutomatique(ca);
@@ -119,7 +122,7 @@ public class Menu {
                 case 3: {
                     	if(ca == null) {
             // Lance une exception si la communauté d'agglomération n'est pas chargée
-                    System.err.println("\u001B[31mLa sauvegarde a échoué car la CA est vide.\u001B[0m");
+                    System.err.println("\u001B[31mSauvegarde Impossible car la CA est vide.\u001B[0m");
                     break;
             	}
                 else{
@@ -127,7 +130,7 @@ public class Menu {
             		System.out.println("Entrez le chemin d'acces du fichier de sauvegarde");
                 	save=sc.next();
                     sauvegarde(save, ca);
-                    System.out.println("\u001B[32mLa sauvegarde a réussi !\u001B[0m"); // Affiche en vert
+                    System.out.println("\u001B[32mLa sauvegarde a réussi !\u001B[0m"); // Affiche en vert 
                     break;}
                 }
                 case 4: {
@@ -155,7 +158,7 @@ public class Menu {
         // Ferme le scanner
         sc.close();
     }
-
+//Menu principal.
     private static void menu0() {
         System.out.println("\n1 - résoudre manuellement");
         System.out.println("2 - résoudre automatiquement");
@@ -163,7 +166,7 @@ public class Menu {
         System.out.println("4 - Affichage graphique");
         System.out.println("5 - Fin");
     }
-
+//menu pour la resolution manuelle.
     private static void menu1() {
         System.out.println("\n1 - Ajouter une zone de recharge;");
         System.out.println("2 - Retirer une zone de recharge;");
@@ -175,6 +178,7 @@ public class Menu {
         System.out.println("2 - Faire une copie");
     }
     
+    // Methode afin de traiter le fichier texte entré en argument.
     private static Ca traitementFichierTexte(String filePath) {
     	boolean aDejaRetireZonesDeRecharge = false;
 
