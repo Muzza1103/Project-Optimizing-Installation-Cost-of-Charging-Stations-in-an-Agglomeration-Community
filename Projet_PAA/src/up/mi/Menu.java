@@ -117,17 +117,30 @@ public class Menu {
                     break;
                 }
                 case 3: {
-                	String save;
+                    	if(ca == null) {
+            // Lance une exception si la communauté d'agglomération n'est pas chargée
+                    System.err.println("\u001B[31mLa sauvegarde a échoué car la CA est vide.\u001B[0m");
+                    break;
+            	}
+                else{
+                    String save;
             		System.out.println("Entrez le chemin d'acces du fichier de sauvegarde");
                 	save=sc.next();
                     sauvegarde(save, ca);
-            		System.out.println("Sauvegarde réussie !");
-                    break;
+                    System.out.println("\u001B[32mLa sauvegarde a réussi !\u001B[0m"); // Affiche en vert
+                    break;}
                 }
                 case 4: {
-                	launchJavaFX(ca);
+                    if (ca == null){
+                    System.err.println("\u001B[31mLa communauté d'agglomération est vide. Vous devez d'abord choisir un moyen de solutionner le problème avec l'option 1 ou 2.\u001B[0m");
+
+                    
+                    }
+                    else{
+                    launchJavaFX(ca);
                     // Afichage javaFX.
-                    break;
+                    }
+                        break;
                 }
                 case 5: {
                     // Sortir du programme pour l'option 5
@@ -137,7 +150,7 @@ public class Menu {
                     System.err.println("Erreur : l'option " + choix0 + " n'est pas valable.");
                 }
             }
-        } while (choix0 != 4);
+        } while (choix0 != 5);
 
         // Ferme le scanner
         sc.close();
@@ -298,12 +311,12 @@ public class Menu {
         	// remplacer le fichier existant.
         	case 1:{
         		ecraserFichier(fileName,ca);
-                
         	}break;
         	
         	//Faire une copie du fichier existant et l'enregistrer.
         	case 2:{
         		copieFichier(fileName);
+
         	}break;
         	
         	default:

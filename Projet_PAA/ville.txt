@@ -21,6 +21,8 @@ route(I,C).
 route(I,H).
 route(J,H).
 route(K,H).
+recharge(A).
+recharge(B).
 recharge(D).
 recharge(E).
 recharge(H).
