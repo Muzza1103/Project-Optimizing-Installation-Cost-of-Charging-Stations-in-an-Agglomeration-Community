@@ -1,7 +1,7 @@
-# Project : Optimizing the cost of installation of charging stations in a community of agglomerations 
+# Optimizing Charging Station Installation Costs in Urban Communities
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg))](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](http://forthebadge.com)
 
-## The program solves and displays, using different algorithms, what could be the minimum number of charging stations needed for a community of agglomerations to minimize the cost of electrification of the road network
+## This program aim to solve and display, using different algorithms, what could be the minimum number of charging stations needed for a community of agglomerations to minimize the cost of electrification of the road network
 
 
 This project, fully functional, was carried out as a part of our third licence year in CS for the Advanced Programming and Applications course.
