@@ -140,8 +140,11 @@ public class Menu {
                     if (ca == null){
                     System.err.println("\u001B[31mLa communauté d'agglomération est vide. Vous devez d'abord choisir un moyen de solutionner le problème avec l'option 1 ou 2.\u001B[0m");
                     }
-                    else{
+                    else
+                    	try {
                     launchJavaFX(ca);
+                    }catch (IllegalStateException e) {
+                        System.err.println("\u001B[31mLa représentation graphique ne peut être affichée que une seule fois !\u001B[0m");
                     // Afichage javaFX.
                     }
                         break;
