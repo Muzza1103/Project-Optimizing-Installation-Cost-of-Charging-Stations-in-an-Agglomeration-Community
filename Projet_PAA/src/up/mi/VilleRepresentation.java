@@ -12,8 +12,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class VilleRepresentation extends Application {
-    private static Ca ca;
-    private boolean[][] matrice;
+    private static Ca ca; // Communauté d'agglomération
+    private boolean[][] matrice; // Matrice représentant les connexions entre les villes
 
     @Override
     public void start(Stage primaryStage) {
@@ -26,11 +26,12 @@ public class VilleRepresentation extends Application {
             matrice = ca.getMatrice();
 
             if (villes == null || villes.isEmpty() || matrice == null || matrice.length != villes.size() || matrice[0].length != villes.size()) {
-                throw new NullPointerException("La liste de villes est vide ou nulle, ou la matrice est incorrecte");
+                throw new NullPointerException("La liste de villes est vide, nulle, ou la matrice est incorrecte");
             }
 
             int gridSize = 3; // Modifier la densité de la grille
 
+            // Boucle pour créer les cercles représentant les villes
             for (int i = 0; i < villes.size(); i++) {
                 Circle villeACircle = new Circle();
                 int row = i / gridSize;
@@ -42,12 +43,14 @@ public class VilleRepresentation extends Application {
                 villeACircle.setCenterY(y);
                 villeACircle.setRadius(20);
 
+                // Remplissage du cercle en vert si la ville a une zone de recharge, sinon en rouge
                 if (!villes.get(i).getZone()) {
                     villeACircle.setFill(Color.RED);
                 } else {
                     villeACircle.setFill(Color.GREEN);
                 }
 
+                // Affichage du nom de la ville
                 Text cityName = new Text(villes.get(i).getNom());
                 cityName.setX(x - cityName.getBoundsInLocal().getWidth() / 2);
                 cityName.setY(y + cityName.getBoundsInLocal().getHeight() / 4);
@@ -55,6 +58,7 @@ public class VilleRepresentation extends Application {
                 root.getChildren().addAll(villeACircle, cityName);
             }
 
+            // Boucle pour créer les lignes représentant les routes entre les villes
             for (int i = 0; i < villes.size(); i++) {
                 for (int j = 0; j < villes.size(); j++) {
                     if (matrice[i][j]) {
@@ -85,7 +89,7 @@ public class VilleRepresentation extends Application {
         double deltaY = endY - startY;
         double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        // Normaliser le vecteur de direction
+        // Normalisation du vecteur de direction
         double normalizedDeltaX = deltaX / distance;
         double normalizedDeltaY = deltaY / distance;
 
@@ -95,15 +99,17 @@ public class VilleRepresentation extends Application {
         double endXOnCircle = endX - normalizedDeltaX * radius;
         double endYOnCircle = endY - normalizedDeltaY * radius;
 
-        // Dessiner la ligne
+        // Dessin de la ligne
         Line routeLine = new Line(startXOnCircle, startYOnCircle, endXOnCircle, endYOnCircle);
         root.getChildren().add(routeLine);
     }
 
+    // Méthode pour définir la communauté d'agglomération
     public static void setCa(Ca ca) {
         VilleRepresentation.ca = ca;
     }
 
+    // Méthode principale pour lancer l'application JavaFX
     public static void main(String[] args) {
         launch(args);
     }
