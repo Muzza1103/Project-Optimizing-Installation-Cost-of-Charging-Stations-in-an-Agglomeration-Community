@@ -19,9 +19,18 @@ public class Menu {
 
     public static void main(String[] args) {
         // Vérifier s'il y a un argument passé lors de l'exécution
-        if (args.length == 0) {//sinon erreur et le programme ne se lance pas
-            System.err.println("\u001B[31mVeuillez spécifier le chemin du fichier en argument.\u001B[0m");
-            return;
+        try {
+    		if (args.length == 0) {
+    			throw new IllegalArgumentException("Veuillez spécifier le chemin du fichier en argument.");
+    		}
+    		File file = new File(args[0]);
+    		if (!file.exists()) {
+    			throw new FileNotFoundException("Le fichier dont vous avez rentré le chemin n'existe pas.\nVérifier que le chemin rentré en argument 5est bien correct.");
+    		}
+    	}catch (Exception e){
+    			System.err.println("\u001B[31mErreur : "+e.getMessage()+"\u001B[0m");
+    			System.err.println("\u001B[31mFin.\u001B[0m");
+    			return;
         }
 
         // Récupérer le chemin du fichier depuis les arguments
@@ -60,6 +69,7 @@ public class Menu {
                         ca.afficheVillesAvecZone();
                         System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
                         ca.afficheVillesSansZone();
+			System.out.println("Votre choix :");
                         //on affiche toutes les villes en divisant en fonction de l'existance d'une zone de recharge ou pas
                         choix = sc.nextInt();
                         sc.nextLine();
@@ -94,8 +104,9 @@ public class Menu {
                 	    }
                 	System.out.println("Cette communauté d'agglomération posséde "+ca.scoreCa()+" zones de recharges\n");
                 	int choix;
-                	System.out.println("Voulez vous appliquer l'algo2 du sujet (1), un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes), ou revenir au menu principal (3) ?");
-                	while (!sc.hasNextInt()) {
+                	System.out.println("Voulez vous appliquer l'algo2 du sujet (1), un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes, cet algorithme peut être vu comme un algorithme de Welsh-Powel modifié), ou revenir au menu principal (3) ?");
+                	System.out.println("Votre choix :");
+			while (!sc.hasNextInt()) {
                         System.out.println("\u001B[31mVeuillez entrer un nombre valide.\u001B[0m");
                         sc.next(); // Consommer la saisie invalide
                     }
@@ -141,7 +152,7 @@ public class Menu {
                 case 3: {//permet la sauvegarde de la solution
                     	if(ca == null) {
             // Lance une exception si la communauté d'agglomération n'est pas chargée
-                    System.err.println("\u001B[31mSauvegarde Impossible car la CA est vide.\u001B[0m");
+                    System.err.println("\u001B[31mVous devez d'abord choisir un moyen de solutionner le problème avec l'option 1 ou 2.\u001B[0m");
                     break;
             	}//pour fonctionner, l'utilisateur doit d'abord solutionner le probleme d'une maniere ou d'une autre
                 else{
@@ -154,7 +165,7 @@ public class Menu {
                 }
                 case 4: {
                     if (ca == null){
-                    System.err.println("\u001B[31mLa communauté d'agglomération est vide. Vous devez d'abord choisir un moyen de solutionner le problème avec l'option 1 ou 2.\u001B[0m");
+                    System.err.println("\u001B[31mVous devez d'abord choisir un moyen de solutionner le problème avec l'option 1 ou 2.\u001B[0m");
                     }
                     else
                     	try {
@@ -226,39 +237,57 @@ public class Menu {
 
             BufferedReader reader2 = new BufferedReader(new FileReader(filePath));
             String line2;
+	    ArrayList<Integer> ligneErr = new ArrayList<>();
+	    int compteur = 0;
             while ((line2 = reader2.readLine()) != null) {
+            	compteur++;
+            	if(line2.length()<5) {
+            		ligneErr.add(compteur);
+            		System.err.println("\u001B[31mVous avez une erreur dans votre fichier, néanmoins la Communauté d'agglomération a été chargé avec les lignes correctes (qui respectent le format donné).\u001B[0m");
+            	}else
                 if (line2.substring(0, 5).equals("ville")) {
                 	int indexFin = line2.indexOf(')');
                     String ville = line2.substring(6,indexFin);
                     ca.ajouterVille(ville);
                 } else if (line2.substring(0, 5).equals("route")) {
-                
                 	int indexSeparateur = line2.indexOf(',');
                     String depart = line2.substring(6,indexSeparateur);
                     int indexFin = line2.indexOf(')');
                     String arrivee = line2.substring(indexSeparateur+1,indexFin);
-                     if (depart.equals(arrivee)) //permet d'empecher la création d'un chemin entre une ville et elle meme
+                    if (depart.equals(arrivee)) //permet d'empecher la création d'un chemin entre une ville et elle meme
                     {
+                    ligneErr.add(compteur);
                     System.out.println("\n le départ ne peut pas être la même ville que l'arrivée, vérifier votre fichier."); 
                     }else{
                     System.out.println("\n" + depart + "---" + arrivee);
                     ca.ajouterRoute(depart, arrivee);
                     }
                 } else if (line2.substring(0, 8).equals("recharge")) {
-                    if (!aDejaRetireZonesDeRecharge) {//permet a travers la flag variable, de ne pas reinitialiser les zones de racharges a chaque itération dans le fichier .txt
+                    if (!aDejaRetireZonesDeRecharge) {
                         ca.retirerZonesDeRechargeDeToutesLesVilles();
-                        aDejaRetireZonesDeRecharge = true;//flag variable
-                        System.out.println("les villes avec recharge sont:");
+                        aDejaRetireZonesDeRecharge = true;
                     }
                     int indexFin = line2.indexOf(')');
                     String recharge = line2.substring(9,indexFin);
-                    ca.ajouterZoneDeRecharge(recharge);//on ajoute les zones du fichier .txt après avoir retirer les zones de la solution naive
+                    ca.ajouterZoneDeRecharge(recharge);
                 } else {
-                    System.err.println("\u001B[31mVous avez une erreur dans votre fichier.\u001B[0m");
+                	ligneErr.add(compteur);
+                    System.err.println("\u001B[31mVous avez une erreur dans votre fichier, néanmoins la Communauté d'agglomération a été chargé avec les lignes correctes (qui respectent le format donné).\u001B[0m");
                     break;
                 }
             }
-            reader2.close();//on arrete de lire le fichier
+            reader2.close();
+            if(ligneErr.size()!=0) {
+            	if(ligneErr.size()==1) {
+            		System.out.println("\nVoici la ligne ou il y a une erreur :");
+            	}else {
+            		System.out.println("\nVoici les lignes ou il y a une erreur :");
+            	}
+            	for(int i=0;i<ligneErr.size();i++) {
+            		System.out.print(ligneErr.get(i)+" ");
+            	}
+            }
+            System.out.println("\n\nLes villes avec recharge sont:");
             ca.afficheVillesAvecZone();
             return ca;
         } catch (IOException e) {
@@ -342,69 +371,49 @@ public class Menu {
         File file = new File(fileName);
 		// Vérifier si le fichier existe déja
         if (file.exists()) {
+        	System.out.println("\nCe fichier existe déjà.");
         	Scanner sc = new Scanner(System.in);
         	int choix;
         	 
         	//Afichage du menu
         	do {
         		 menu2();
+        		 System.out.println("\nVotre choix :");
         		 //Choix Utilisateur
         		 choix = sc.nextInt();
         		 sc.nextLine();
-        	switch(choix) {
+        		 switch(choix) {
         	
-        	// remplacer le fichier existant.
-        	case 1:{
-        		ecraserFichier(fileName,ca);
-        	}break;
+        		 // remplacer le fichier existant.
+        		 case 1:{
+        			 System.out.println("Remplacement du fichier "+file.getName());
+        			 ecrireCaDansFichier(fileName,ca);
+        		 }break;
         	
-        	//Faire une copie du fichier existant et l'enregistrer.
-        	case 2:{
-        		copieFichier(fileName);
+        		 //Faire une copie du fichier existant et l'enregistrer dans ce dernier.
+        		 case 2:{
+        			 copieFichier(fileName,ca);
 
-        	}break;
+        		 }break;
         	
-        	default:
-                System.out.println("Erreur : l'option " + choix + " n'est pas valable.");
+        		 default:
+        			 System.out.println("Erreur : l'option " + choix + " n'est pas valable.");
         	
-        	}
+        		 }
         	}while(choix!=1&&choix!=2);
-        	 
+        	 sc.close();
+        }else {
+        // Créer et enregistre le fichier.
+        	System.out.println("Création du fichier "+file.getName());
+        	ecrireCaDansFichier(fileName, ca);
         }
-        // Enregistre un fichier.
-        FileWriter fileWriter = new FileWriter(fileName);
-
-        // Écriture des informations des villes
-        List<Ville> villes = ca.getVilles();
-        for (Ville ville : villes) {
-            fileWriter.write(ville.toString() + "\n");
-        }
-    
-        // Écriture des routes entre les villes
-        boolean[][] route = ca.getMatrice();
-        for (int i = 0; i < villes.size(); i++) {
-            for (int j = 0; j <= i; j++) {
-                if (route[i][j]) {
-                    fileWriter.write("route(" + villes.get(i).getNom() + "," + villes.get(j).getNom() + ")." + "\n");
-                }
-            }
-        }
-    
-        // Écriture des villes ayant des zones de recharge
-        for (int i = 0; i < villes.size(); i++) {
-            if (villes.get(i).getZone()) {
-                fileWriter.write("recharge(" + villes.get(i).getNom() + ")." + "\n");
-            }
-        }
-    
-        fileWriter.close();
-    } catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     
  // Méthode pour sauvegarder les données dans un fichier
-    private static void ecraserFichier(String fileName, Ca ca) throws IOException {
+    private static void ecrireCaDansFichier(String fileName, Ca ca) throws IOException {
         // Initialise un FileWriter pour écrire dans le fichier spécifié
         FileWriter fileWriter = new FileWriter(fileName);
         // Récupère les informations sur les villes et les routes de la communauté d'agglomération
@@ -437,14 +446,13 @@ public class Menu {
     }
 
     // Méthode pour créer une copie du fichier existant avec une date ajoutée au nom du fichier
-    private static void copieFichier(String fileName) throws IOException {
+    private static void copieFichier(String fileName, Ca ca) throws IOException {
         // Obtient la date actuelle sous forme de chaîne
         String dateString = new SimpleDateFormat("HH:mm_dd-MM-yyyy").format(new Date());
-        // Crée un objet File pour le fichier d'origine
-        File file = new File(fileName);
         // Crée un objet File pour la nouvelle copie du fichier
-        File tempFile = new File(fileName + "_Copy_" + dateString);
-        // Effectue la copie du fichier d'origine vers la nouvelle copie avec la date ajoutée au nom
-        Files.copy(file.toPath(), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        String fileCopyName = fileName.replace(".txt", "") + "_Copy_" + dateString.replace(":", "h") + ".txt";
+        File fileCopy = new File(fileCopyName);
+        System.out.println("Création de la copie "+fileCopy.getName());
+        ecrireCaDansFichier(fileCopyName,ca);
     }
 }
