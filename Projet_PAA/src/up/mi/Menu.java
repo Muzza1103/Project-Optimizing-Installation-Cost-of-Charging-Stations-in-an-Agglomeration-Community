@@ -94,7 +94,7 @@ public class Menu {
                 	    }
                 	System.out.println("Cette communauté d'agglomération posséde "+ca.scoreCa()+" zones de recharges\n");
                 	int choix;
-                	System.out.println("Voulez vous appliquer l'algo2 du sujet (1) ou appliquer un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
+                	System.out.println("Voulez vous appliquer l'algo2 du sujet (1), un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes), ou revenir au menu principal (3) ?");
                 	while (!sc.hasNextInt()) {
                         System.out.println("\u001B[31mVeuillez entrer un nombre valide.\u001B[0m");
                         sc.next(); // Consommer la saisie invalide
@@ -129,6 +129,8 @@ public class Menu {
                             System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
                             ca.afficheVillesSansZone();
                             break;
+			    case 3:
+				    break;
                     	default:
                     		System.out.println("Votre choix ne correspond a aucune option, retour au menu");
                     }
