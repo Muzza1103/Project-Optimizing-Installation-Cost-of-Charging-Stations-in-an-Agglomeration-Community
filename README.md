@@ -40,7 +40,8 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 
 ### for option number 4, how it represents the solution graphically:
 
-(exemple image.png)
+![representation graphique](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/f72a2c3c-58c0-4f67-b380-14e731a71216)
+
 
 
 # How to install and run this project
