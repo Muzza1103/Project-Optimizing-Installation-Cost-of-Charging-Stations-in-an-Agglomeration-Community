@@ -74,7 +74,8 @@ in the description of our project, all the roads between two cities are standard
 
 
 to save or to represent our project, the user needs first to try to solve the problem manually our with the help of one of our algorithms.
-even tho this isn't really an issue, we could developp this by solving it automatically if the user wants to save or represent the solution without solving it, it's more of a developpment choice
+
+Even tho this isn't really an issue, we could change this for it to be solved automatically if the user wants to save or represent the solution without applying a solution, it's more of a developpment choice
 
 
 
