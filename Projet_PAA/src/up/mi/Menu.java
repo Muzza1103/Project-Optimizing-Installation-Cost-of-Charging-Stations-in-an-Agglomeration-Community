@@ -30,6 +30,8 @@ public class Menu {
         int choix0;
         Scanner sc = new Scanner(System.in);
         Ca ca =null;
+	File file = new File(filePath);
+    	System.out.println("Lecture du fichier "+file.getName());
         do {
             menu0();// menu de base pour l'utilisateur
    		 while (!sc.hasNextInt()) {
