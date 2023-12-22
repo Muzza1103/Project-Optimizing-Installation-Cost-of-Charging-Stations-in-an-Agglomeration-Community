@@ -26,14 +26,20 @@ public class Menu {
 
         // Récupérer le chemin du fichier depuis les arguments
         String filePath = args[0];
-
+        
         int choix0;
         Scanner sc = new Scanner(System.in);
         Ca ca =null;
         do {
             menu0();// menu de base pour l'utilisateur
+   		 while (!sc.hasNextInt()) {
+             System.out.println("\u001B[31mVeuillez entrer un nombre valide.\u001B[0m");
+             sc.next(); // Consommer la saisie invalide
+         }// Bloc pour gerer l'erreur si l'utilisateur n'entre pas un int.
             choix0 = sc.nextInt();
             sc.nextLine();
+            
+
 
             switch (choix0) { //en fonction de son choix sur le menu 0 on entre dans ce switch
                 case 1: {
@@ -89,6 +95,14 @@ public class Menu {
                 	System.out.println("Cette communauté d'agglomération posséde "+ca.scoreCa()+" zones de recharges\n");
                 	int choix;
                 	System.out.println("Voulez vous appliquer l'algo2 du sujet (1) ou appliquer un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
+                	while (!sc.hasNextInt()) {
+                        System.out.println("\u001B[31mVeuillez entrer un nombre valide.\u001B[0m");
+                        sc.next(); // Consommer la saisie invalide
+                    }
+           		 while (!sc.hasNextInt()) {
+                     System.out.println("\u001B[31mVeuillez entrer un nombre valide.\u001B[0m");
+                     sc.next(); // Consommer la saisie invalide
+                 }// Bloc pour gerer l'erreur si l'utilisateur n'entre pas un int.
                 	choix = sc.nextInt();//l'utilisateur choisi l'algorithme qu'il veut utiliser pour trouver une solution
                     sc.nextLine();
                     switch(choix) {
@@ -144,7 +158,7 @@ public class Menu {
                     	try {
                     launchJavaFX(ca);
                     }catch (IllegalStateException e) {
-                        System.err.println("\u001B[31mLa représentation graphique ne peut être affichée que une seule fois !\u001B[0m");
+                        System.err.println("\u001B[31mLa représentation graphique ne peut être afficheé qu'une seule fois.\u001B[0m");
                     // Afichage javaFX.
                     }
                         break;
