@@ -60,10 +60,10 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
         then 
     *give the path to your javafx SDK. for example: "C:\path\to\javafx-sdk\lib"
 
+*notice that as for any java program, you need to have java and the sdk downloaded correctly. So if during the execution of the script you run into this type of error "the operation couldn't be completed. unable to locate a java Runtime that supports javac." you may need to install the SDK correctly. You can do that from the oracle [official website website](https://www.oracle.com/java/technologies/downloads/) and by choosing the plateform corresponding to yours 
 
 
-
-**notice that you can use just the name of the file (without putting it's path first) if you place it at the same level of src and bin folders.
+**To run the program, you can use just the name of the file (without putting it's path first) if you place it at the same level of src and bin folders.
 **for testing purposes, you can use the "ville.txt" already present in the project to try with a predefined CA and solution
 
 *feel free to try the different options of your program and enjoy !
