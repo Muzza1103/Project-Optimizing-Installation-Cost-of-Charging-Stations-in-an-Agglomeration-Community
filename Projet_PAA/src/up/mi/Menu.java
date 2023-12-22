@@ -405,7 +405,6 @@ public class Menu {
         	
         		 }
         	}while(choix!=1&&choix!=2);
-        	 sc.close();
         }else {
         // Créer et enregistre le fichier.
         	System.out.println("Création du fichier "+file.getName());
