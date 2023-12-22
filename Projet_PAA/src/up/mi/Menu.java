@@ -47,13 +47,9 @@ public class Menu {
                 	
                 	int choix = 0;
                 	
-<<<<<<< HEAD
-                    do {
-                        menu1();// menu 1 permet de retirer ou ajouter des zones de recharge
-=======
+
                     do { 
                         menu1();
->>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                         System.out.println("\nListe des villes possédant des zones de recharge :");
                         ca.afficheVillesAvecZone();
                         System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
@@ -92,20 +88,11 @@ public class Menu {
                 	    }
                 	System.out.println("Cette communauté d'agglomération posséde "+ca.scoreCa()+" zones de recharges\n");
                 	int choix;
-<<<<<<< HEAD
                 	System.out.println("Voulez vous appliquer l'algo2 du sujet (1) ou appliquer un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
                 	choix = sc.nextInt();//l'utilisateur choisi l'algorithme qu'il veut utiliser pour trouver une solution
                     sc.nextLine();
                     switch(choix) {
                     	case 1://appel et résolution par l'algo 2 du sujet
-=======
-                	System.out.println("Voulez vous appliquer l'algo n°2 du sujet (1) ou appliquer notre nouvel algo ? (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
-                	choix = sc.nextInt();
-                    sc.nextLine();
-                    switch(choix) {
-                    	//Algo sujet 
-                    case 1:
->>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                     		System.out.println("Début de la résolution automatique\n");
                     		ca=resolutionAlgo2(ca,ca.getNbrVille());
                         	System.out.println("\nFin de la résolution automatique\n");
@@ -115,13 +102,10 @@ public class Menu {
                             System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
                             ca.afficheVillesSansZone();
                             break;
-<<<<<<< HEAD
-                    	case 2://appel et résolution par l'algo de résolution automatique
-=======
+
                             
-                            //Algo perso
+                            //appel et résolution par l'algo de résolution automatique perso
                     	case 2:
->>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                     		System.out.println("Début de la résolution automatique\n");
                     		resolutionAutomatique(ca);
                         	System.out.println("\nFin de la résolution automatique\n");
@@ -149,11 +133,7 @@ public class Menu {
             		System.out.println("Entrez le chemin d'accès où vous voulez sauvegarder votre fichier :");
                 	save=sc.next();
                     sauvegarde(save, ca);
-<<<<<<< HEAD
                     System.out.println("\u001B[32mLa sauvegarde a réussi !\u001B[0m"); // Affiche en vert le succés et en rouge l'échec
-=======
-                    System.out.println("\u001B[32mLa sauvegarde à réussi !\u001B[0m"); // Affiche en vert 
->>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                     break;}
                 }
                 case 4: {
