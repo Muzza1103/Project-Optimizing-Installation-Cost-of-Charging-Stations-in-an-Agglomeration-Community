@@ -38,8 +38,9 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 
 ![bash](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/af9e54f1-f048-4986-a37a-deb2a625a4aa)
 
-### for option number 4, how it represents the solution graphically:![bash](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/b8a68e42-3805-47a4-a582-f0628b8b9fce)
+### for option number 4, how it represents the solution graphically:
 
+(exemple image.png)
 
 
 # How to install and run this project
