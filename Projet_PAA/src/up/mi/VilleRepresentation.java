@@ -15,7 +15,6 @@ public class VilleRepresentation extends Application {
     private static Ca ca;
     private boolean[][] matrice;
 
-
     @Override
     public void start(Stage primaryStage) {
         Pane root = new Pane();
@@ -64,9 +63,7 @@ public class VilleRepresentation extends Application {
                         int rowJ = j / gridSize;
                         int colJ = j % gridSize;
                         if (row != rowJ || col != colJ) {
-                            // Modifier les calculs pour ajuster la position des routes
-                            Line routeLine = new Line(100 + col * 150, 150 + row * 150, 100 + colJ * 150, 150 + rowJ * 150);
-                            root.getChildren().add(0,routeLine);
+                            createCurvedLine(root, 100 + col * 150, 150 + row * 150, 100 + colJ * 150, 150 + rowJ * 150);
                         }
                     }
                 }
@@ -80,6 +77,28 @@ public class VilleRepresentation extends Application {
         }
     }
 
+    // Méthode pour créer une ligne courbe évitant les autres cercles
+    private void createCurvedLine(Pane root, double startX, double startY, double endX, double endY) {
+        double radius = 20;
+
+        double deltaX = endX - startX;
+        double deltaY = endY - startY;
+        double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        // Normaliser le vecteur de direction
+        double normalizedDeltaX = deltaX / distance;
+        double normalizedDeltaY = deltaY / distance;
+
+        // Points de départ et d'arrivée sur le cercle
+        double startXOnCircle = startX + normalizedDeltaX * radius;
+        double startYOnCircle = startY + normalizedDeltaY * radius;
+        double endXOnCircle = endX - normalizedDeltaX * radius;
+        double endYOnCircle = endY - normalizedDeltaY * radius;
+
+        // Dessiner la ligne
+        Line routeLine = new Line(startXOnCircle, startYOnCircle, endXOnCircle, endYOnCircle);
+        root.getChildren().add(routeLine);
+    }
 
     public static void setCa(Ca ca) {
         VilleRepresentation.ca = ca;
