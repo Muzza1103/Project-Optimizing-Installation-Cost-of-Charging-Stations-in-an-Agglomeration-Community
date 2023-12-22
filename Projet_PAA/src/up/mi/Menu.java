@@ -9,15 +9,17 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Random;
 
 public class Menu {
 
     public static void main(String[] args) {
         // Vérifier s'il y a un argument passé lors de l'exécution
-        if (args.length == 0) {
+        if (args.length == 0) {//sinon erreur et le programme ne se lance pas
             System.err.println("\u001B[31mVeuillez spécifier le chemin du fichier en argument.\u001B[0m");
             return;
         }
@@ -29,45 +31,50 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         Ca ca =null;
         do {
-            menu0();
+            menu0();// menu de base pour l'utilisateur
             choix0 = sc.nextInt();
             sc.nextLine();
 
-            switch (choix0) {
+            switch (choix0) { //en fonction de son choix sur le menu 0 on entre dans ce switch
                 case 1: {
                 	
                     // Traitement pour l'option 1
-                	ca = traitementFichierTexte(filePath);
-                	if(!ca.verifConditionAcc()) {
+                	ca = traitementFichierTexte(filePath);// appel de la méthode qui lis et extrait les informations du fichier texte
+                	if(!ca.verifConditionAcc()) {// si le fichier ne verifie pas la contrainte d'accessibilité on suppose que toutes les villes possédent une zone de recharge
                 		System.out.println("On repart de la solution naïve ( toutes les villes ont des zones de recharge )");
                 		ca.ajouterZonesDeRechargeDeToutesLesVilles();
                 	}
                 	
                 	int choix = 0;
                 	
+<<<<<<< HEAD
+                    do {
+                        menu1();// menu 1 permet de retirer ou ajouter des zones de recharge
+=======
                     do { 
                         menu1();
+>>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                         System.out.println("\nListe des villes possédant des zones de recharge :");
                         ca.afficheVillesAvecZone();
                         System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
                         ca.afficheVillesSansZone();
-
+                        //on affiche toutes les villes en divisant en fonction de l'existance d'une zone de recharge ou pas
                         choix = sc.nextInt();
                         sc.nextLine();
 
                         switch (choix) {
                             case 1:
                                 System.out.println("\nEntrez le nom de la ville où vous souhaitez ajouter une borne de recharge.");
-                                String ajout = sc.nextLine().toUpperCase();
+                                String ajout = sc.nextLine().toUpperCase();//uniformisation du texte pour faciliter l'expérience utilisateur
                                 ca.ajouterZoneDeRecharge(ajout);
                                 break;
                             case 2:
                                 System.out.println("Entrez le nom de la ville où vous souhaitez retirer une borne de recharge.");
                                 String retirer = sc.nextLine().toUpperCase();
-                                ca.retirerZoneDeRecharge(retirer);
+                                ca.retirerZoneDeRecharge(retirer);// la contrainte est toujours vérifié a travers cette méthode
                                 break;
                             case 3:
-                                break;
+                                break;//arrêt de la modification
                             default:
                                 System.out.println("Erreur : l'option " + choix + " n'est pas valable.");
                         }
@@ -78,19 +85,27 @@ public class Menu {
                 }
                 case 2: {
                     // Traitement pour l'option 2
-                	ca = traitementFichierTexte(filePath);
-                	if(!ca.verifConditionAcc()) {
-                		System.out.println("On repart de la solution naïve ( toutes les villes ont des zones de recharge )");
-                		ca.ajouterZonesDeRechargeDeToutesLesVilles();
-                	}
+                	ca = traitementFichierTexte(filePath);//appel de la méthode qui va extraire les informations du fichier donné en argument
+                	    if(!ca.verifConditionAcc()) {
+                		    System.out.println("On repart de la solution naïve ( toutes les villes ont des zones de recharge )");
+                		    ca.ajouterZonesDeRechargeDeToutesLesVilles();
+                	    }
                 	System.out.println("Cette communauté d'agglomération posséde "+ca.scoreCa()+" zones de recharges\n");
                 	int choix;
+<<<<<<< HEAD
+                	System.out.println("Voulez vous appliquer l'algo2 du sujet (1) ou appliquer un nouvelle algo (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
+                	choix = sc.nextInt();//l'utilisateur choisi l'algorithme qu'il veut utiliser pour trouver une solution
+                    sc.nextLine();
+                    switch(choix) {
+                    	case 1://appel et résolution par l'algo 2 du sujet
+=======
                 	System.out.println("Voulez vous appliquer l'algo n°2 du sujet (1) ou appliquer notre nouvel algo ? (2) (fonctionne à partir du nombres de voisins respectifs des villes)");
                 	choix = sc.nextInt();
                     sc.nextLine();
                     switch(choix) {
                     	//Algo sujet 
                     case 1:
+>>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                     		System.out.println("Début de la résolution automatique\n");
                     		ca=resolutionAlgo2(ca,ca.getNbrVille());
                         	System.out.println("\nFin de la résolution automatique\n");
@@ -100,9 +115,13 @@ public class Menu {
                             System.out.println("\nListe des villes ne possédant pas de zone de recharge :");
                             ca.afficheVillesSansZone();
                             break;
+<<<<<<< HEAD
+                    	case 2://appel et résolution par l'algo de résolution automatique
+=======
                             
                             //Algo perso
                     	case 2:
+>>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                     		System.out.println("Début de la résolution automatique\n");
                     		resolutionAutomatique(ca);
                         	System.out.println("\nFin de la résolution automatique\n");
@@ -119,25 +138,27 @@ public class Menu {
                     // Sortir de la boucle principale après le traitement de l'option 2
                     break;
                 }
-                case 3: {
+                case 3: {//permet la sauvegarde de la solution
                     	if(ca == null) {
             // Lance une exception si la communauté d'agglomération n'est pas chargée
                     System.err.println("\u001B[31mSauvegarde Impossible car la CA est vide.\u001B[0m");
                     break;
-            	}
+            	}//pour fonctionner, l'utilisateur doit d'abord solutionner le probleme d'une maniere ou d'une autre
                 else{
                     String save;
             		System.out.println("Entrez le chemin d'accès où vous voulez sauvegarder votre fichier :");
                 	save=sc.next();
                     sauvegarde(save, ca);
+<<<<<<< HEAD
+                    System.out.println("\u001B[32mLa sauvegarde a réussi !\u001B[0m"); // Affiche en vert le succés et en rouge l'échec
+=======
                     System.out.println("\u001B[32mLa sauvegarde à réussi !\u001B[0m"); // Affiche en vert 
+>>>>>>> 33ea325b2cb74dd049854676d6f6a0e4a28bff56
                     break;}
                 }
                 case 4: {
                     if (ca == null){
                     System.err.println("\u001B[31mLa communauté d'agglomération est vide. Vous devez d'abord choisir un moyen de solutionner le problème avec l'option 1 ou 2.\u001B[0m");
-
-                    
                     }
                     else{
                     launchJavaFX(ca);
@@ -172,6 +193,7 @@ public class Menu {
         System.out.println("2 - Retirer une zone de recharge;");
         System.out.println("3 - Fin.");
     }
+
  // menu de sauvegarde si fichier existe deja 
     private static void menu2() {
         System.out.println("\n1 - Remplacer le fichier existant");
@@ -183,13 +205,22 @@ public class Menu {
     	boolean aDejaRetireZonesDeRecharge = false;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));//crée un buffer 
             String line;
             int nbrVille = 0;
+            Set<String> villesUniques = new HashSet<>();//va permettre de vérifier si une ville a deja été créé
 
-            while ((line = reader.readLine()).substring(0, 5).equals("ville")) {
-                nbrVille++;
+            while ((line = reader.readLine()) != null) {//première boucle a travers le fichier pour connaitre le nombre de ville
+                // Vérifier si la ligne commence par "ville"
+                if (line.startsWith("ville")) {
+                    // Ajouter à l'ensemble et vérifier si c'était déjà présent
+                    if (!villesUniques.contains(line)) {
+                        villesUniques.add(line);
+                        nbrVille++;
+                    }
+                }
             }
+
             System.out.println("La communauté contient " + nbrVille + " villes :");
             Ca ca = new Ca(nbrVille);
             reader.close();
@@ -202,27 +233,33 @@ public class Menu {
                     String ville = line2.substring(6,indexFin);
                     ca.ajouterVille(ville);
                 } else if (line2.substring(0, 5).equals("route")) {
+                
                 	int indexSeparateur = line2.indexOf(',');
                     String depart = line2.substring(6,indexSeparateur);
                     int indexFin = line2.indexOf(')');
                     String arrivee = line2.substring(indexSeparateur+1,indexFin);
+                     if (depart.equals(arrivee)) //permet d'empecher la création d'un chemin entre une ville et elle meme
+                    {
+                    System.out.println("\n le départ ne peut pas être la même ville que l'arrivée, vérifier votre fichier."); 
+                    }else{
                     System.out.println("\n" + depart + "---" + arrivee);
                     ca.ajouterRoute(depart, arrivee);
+                    }
                 } else if (line2.substring(0, 8).equals("recharge")) {
-                    if (!aDejaRetireZonesDeRecharge) {
+                    if (!aDejaRetireZonesDeRecharge) {//permet a travers la flag variable, de ne pas reinitialiser les zones de racharges a chaque itération dans le fichier .txt
                         ca.retirerZonesDeRechargeDeToutesLesVilles();
-                        aDejaRetireZonesDeRecharge = true;
+                        aDejaRetireZonesDeRecharge = true;//flag variable
                         System.out.println("les villes avec recharge sont:");
                     }
                     int indexFin = line2.indexOf(')');
                     String recharge = line2.substring(9,indexFin);
-                    ca.ajouterZoneDeRecharge(recharge);
+                    ca.ajouterZoneDeRecharge(recharge);//on ajoute les zones du fichier .txt après avoir retirer les zones de la solution naive
                 } else {
                     System.err.println("\u001B[31mVous avez une erreur dans votre fichier.\u001B[0m");
                     break;
                 }
             }
-            reader2.close();
+            reader2.close();//on arrete de lire le fichier
             ca.afficheVillesAvecZone();
             return ca;
         } catch (IOException e) {
@@ -235,29 +272,34 @@ public class Menu {
     
     
     //Algo du sujet 
-    private static Ca resolutionAlgo2(Ca ca,int k) {
-    	int i=0;
-    	int scoreCourant = ca.scoreCa();
-    	List<Ville> villes = ca.getVilles();
-    	while(i<k) {
-    		Random random = new Random();
-    		int nombreAleatoire = random.nextInt(ca.getNbrVille());
-    		if(villes.get(nombreAleatoire).getZone()==true) {
-    			System.out.println("Retire la zone de "+villes.get(nombreAleatoire).getNom());
-    			ca.retirerZoneDeRecharge(villes.get(nombreAleatoire).getNom());
-    		}else {
-    			System.out.println("Ajoute la zone de "+villes.get(nombreAleatoire).getNom());
-    			ca.ajouterZoneDeRecharge(villes.get(nombreAleatoire).getNom());
-    		}
-    		if(ca.scoreCa()<scoreCourant) {
-    			i=0;
-    			scoreCourant = ca.scoreCa();
-    		}else {
-    			i++;
-    		}
-    	}
-    	return ca;
+    private static Ca resolutionAlgo2(Ca ca, int k) {
+        int i = 0;
+        int scoreCourant = ca.scoreCa();
+        List<Ville> villes = ca.getVilles();
+        // Boucle jusqu'à atteindre 'k' itérations ou aucune amélioration du score
+        while (i < k) {
+            Random random = new Random();
+            int nombreAleatoire = random.nextInt(ca.getNbrVille());
+    
+            // Ajoute ou retire une zone de recharge à une ville choisie aléatoirement
+            if (villes.get(nombreAleatoire).getZone()) {
+                System.out.println("Retire la zone de " + villes.get(nombreAleatoire).getNom());
+                ca.retirerZoneDeRecharge(villes.get(nombreAleatoire).getNom());
+            } else {
+                System.out.println("Ajoute la zone de " + villes.get(nombreAleatoire).getNom());
+                ca.ajouterZoneDeRecharge(villes.get(nombreAleatoire).getNom());
+            }
+            // Réinitialise le compteur si le score s'améliore, sinon incrémente
+            if (ca.scoreCa() < scoreCourant) {
+                i = 0;
+                scoreCourant = ca.scoreCa();
+            } else {
+                i++;
+            }
+        }
+        return ca;
     }
+    
     
     
     // Algo perso
@@ -332,26 +374,32 @@ public class Menu {
         }
         // Enregistre un fichier.
         FileWriter fileWriter = new FileWriter(fileName);
-                List<Ville> villes = ca.getVilles();
-                boolean [][] route = ca.getMatrice();
-                for (Ville ville : villes) {
-                    fileWriter.write(ville.toString() + "\n");
-                }
-                for (int i=0;i<villes.size();i++) {
-                	for (int j=0;j<=i;j++) {
-                		if (route[i][j]==true) {
-                            fileWriter.write("route("+villes.get(i).getNom()+","+villes.get(j).getNom()+")."+ "\n");
 
-                		}
-                	}
+        // Écriture des informations des villes
+        List<Ville> villes = ca.getVilles();
+        for (Ville ville : villes) {
+            fileWriter.write(ville.toString() + "\n");
+        }
+    
+        // Écriture des routes entre les villes
+        boolean[][] route = ca.getMatrice();
+        for (int i = 0; i < villes.size(); i++) {
+            for (int j = 0; j <= i; j++) {
+                if (route[i][j]) {
+                    fileWriter.write("route(" + villes.get(i).getNom() + "," + villes.get(j).getNom() + ")." + "\n");
                 }
-                for (int i=0;i<villes.size();i++) {
-                	if (villes.get(i).getZone()==true) {
-                		fileWriter.write("recharge("+villes.get(i).getNom()+")."+"\n");
-                	}
-                }
-                fileWriter.close();
-            } catch (IOException e) {
+            }
+        }
+    
+        // Écriture des villes ayant des zones de recharge
+        for (int i = 0; i < villes.size(); i++) {
+            if (villes.get(i).getZone()) {
+                fileWriter.write("recharge(" + villes.get(i).getNom() + ")." + "\n");
+            }
+        }
+    
+        fileWriter.close();
+    } catch (IOException e) {
                 e.printStackTrace();
             }
         }
