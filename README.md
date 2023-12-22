@@ -42,6 +42,11 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 
 ![representation graphique](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/f72a2c3c-58c0-4f67-b380-14e731a71216)
 
+#### Legend for the representation
+
+
+![legend](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/5f1e78ed-886f-4a8b-b001-5f676140156c)
+
 
 
 # How to install and run this project
