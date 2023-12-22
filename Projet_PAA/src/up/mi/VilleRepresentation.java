@@ -81,7 +81,7 @@ public class VilleRepresentation extends Application {
         }
     }
 
-    // Méthode pour créer une ligne courbe évitant les autres cercles
+    // Méthode pour creer des lignes en relief afin de ne pas confondre les routes qui se superposent 
     private void createCurvedLine(Pane root, double startX, double startY, double endX, double endY) {
         double radius = 20;
 
