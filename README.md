@@ -48,9 +48,9 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 
     For linux and Macos users:
 
-    * give the permission to run the script with "chmod +x run.sh"
-    * run the script with ./run.sh
-    * give the absolute path to your javafx SDK. for example:"/home/user/javafx-sdk/lib"
+    * give the permission to run the script with the"chmod +x run.sh" command.
+    * run the script through "./run.sh"
+    * give the path to your javafx SDK. for example:"/home/user/javafx-sdk/lib"
 
 
     For Windows users:
@@ -58,13 +58,13 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
     or
     * just double click on "run_windows.bat"
         then 
-    *give the absolute path to your javafx SDK. for example: "C:\path\to\javafx-sdk\lib"
+    *give the path to your javafx SDK. for example: "C:\path\to\javafx-sdk\lib"
 
 
 
 
 **notice that you can use just the name of the file (without putting it's path first) if you place it at the same level of src and bin folders.
-**for testing purposes, you can use the "ville.txt" already present in the project to try our project
+**for testing purposes, you can use the "ville.txt" already present in the project to try with a predefined CA and solution
 
 *feel free to try the different options of your program and enjoy !
 
