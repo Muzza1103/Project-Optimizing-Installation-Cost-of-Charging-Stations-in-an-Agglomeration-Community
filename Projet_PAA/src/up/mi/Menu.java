@@ -247,7 +247,7 @@ public class Menu {
             	compteur++;
             	if(line2.length()<5) {
             		ligneErr.add(compteur);
-            		System.err.println("\u001B[31mVous avez une erreur dans votre fichier, néanmoins la Communauté d'agglomération a été chargé avec les lignes correctes (qui respectent le format donné).\u001B[0m");
+            		System.err.println("\u001B[31mVous avez une erreur dans votre fichier ligne "+compteur+", néanmoins la Communauté d'agglomération a été chargé avec les lignes correctes (qui respectent le format donné).\u001B[0m");
             	}else
                 if (line2.substring(0, 5).equals("ville")) {
                 	int indexFin = line2.indexOf(')');
@@ -276,7 +276,7 @@ public class Menu {
                     ca.ajouterZoneDeRecharge(recharge);
                 } else {
                 	ligneErr.add(compteur);
-                    System.err.println("\u001B[31mVous avez une erreur dans votre fichier, néanmoins la Communauté d'agglomération a été chargé avec les lignes correctes (qui respectent le format donné).\u001B[0m");
+                    System.err.println("\u001B[31mVous avez une erreur dans votre fichier ligne "+compteur+", néanmoins la Communauté d'agglomération a été chargé avec les lignes correctes (qui respectent le format donné).\u001B[0m");
                     break;
                 }
             }
