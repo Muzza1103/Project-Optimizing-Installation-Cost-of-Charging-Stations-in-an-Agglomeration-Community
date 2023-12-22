@@ -65,10 +65,14 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 
 -You can confirm. The new library should be present in the classpath of the project
 
--To run the program, go to:
-Run --> Run Configurations --> Arguments and add those arguments to the VM : "--module-path /chemin/du/sdk/lib --add-modules=javafx.controls."
+-To run the program, go to the class Menu.java:
 
+Run --> Run Configurations --> Arguments and add those arguments to the VM : "--module-path /path/of/the/sdk/lib --add-modules=javafx.controls."
 make sure the "Use the -XstartOnFirstThrea" box is unchecked
+
+Run --> Run Configurations -> Program Arguments --> add the path of the file containing the data of the community of agglomerations.
+
+-You can now run the class Menu.java.
 
 ### To run directly from the bash terminal
 
