@@ -15,4 +15,3 @@ fi
 
 echo "Execution de la classe principale..."
 java --module-path "$JAVAFX_SDK_PATH" --add-modules javafx.controls,javafx.fxml -cp bin up.mi.Menu "$FILE_PATH"
-
