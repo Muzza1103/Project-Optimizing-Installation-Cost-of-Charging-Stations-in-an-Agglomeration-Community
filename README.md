@@ -48,11 +48,16 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 ### To run on Eclipse:
 
 -In Eclipse, add a library to the project classpath
+
 -In the user library, create a new library that you can call JFX 11 for exemple
+
 -Add the jar archives present in the project directory in the Lib directory of the SDK
+
 -You can confirm. The new library should be present in the classpath of the project
+
 -To run the program, go to:
 Run --> Run Configurations --> Arguments and add those arguments to the VM : "--module-path /chemin/du/sdk/lib --add-modules=javafx.controls."
+
 make sure the "Use the -XstartOnFirstThrea" box is unchecked
 
 ### To run directly from the bash terminal
