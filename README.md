@@ -44,6 +44,19 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 -first, make sure you have a javaFX installed on your computer, and that it's compatible with the java version you're running.
 [Link for javaFx](https://gluonhq.com/products/javafx/)
 -Then, clone the repository or download it and unzip it at the location of your choice
+
+### To run on Eclipse:
+
+-In Eclipse, add a library to the project classpath
+-In the user library, create a new library that you can call JFX 11 for exemple
+-Add the jar archives present in the project directory in the Lib directory of the SDK
+-You can confirm. The new library should be present in the classpath of the project
+-To run the program, go to:
+Run --> Run Configurations --> Arguments and add those arguments to the VM : "--module-path /chemin/du/sdk/lib --add-modules=javafx.controls."
+make sure the "Use the -XstartOnFirstThrea" box is unchecked
+
+### To run directly from the bash terminal
+
 -After that, place yourself at the same level of the src and bin (from the repertory where you extract the project, the path is "PROJET_PAA/Projet_PAA")
 
     For linux and Macos users:
