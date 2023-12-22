@@ -57,6 +57,8 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
     *run the script with : "run_windows.bat"
     or
     * just double click on "run_windows.bat"
+        then 
+    *give the absolute path to your javafx SDK. for example: "C:\path\to\javafx-sdk\lib"
 
 
 
