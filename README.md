@@ -36,12 +36,11 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 ## This is what our program looks like
 ### during the execution:
 
-![Execution of the code](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/bash.png)
+![bash](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/af9e54f1-f048-4986-a37a-deb2a625a4aa)
 
 ### for option number 4, how it represents the solution graphically:![bash](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/b8a68e42-3805-47a4-a582-f0628b8b9fce)
 
 
-![bash](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/af9e54f1-f048-4986-a37a-deb2a625a4aa)
 
 # How to install and run this project
 
@@ -99,7 +98,8 @@ to save or to represent our project, the user needs first to try to solve the pr
 
 Even tho this isn't really an issue, we could change this for it to be solved automatically if the user wants to save or represent the solution without applying a solution, it's more of a developpment choice
 
-
+Another problem we faced is the fact that when you run the graphical representation the first time, and then close the window, you can't re-run the representation without re-running the program with a new start, so don't forget to save your solution
+ 
 
 ## Tools used during development
 
