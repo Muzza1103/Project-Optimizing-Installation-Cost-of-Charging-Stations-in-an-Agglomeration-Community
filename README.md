@@ -35,8 +35,12 @@ The `resolutionAutomatique` method is an algorithm that strategically removes ch
 
 ## This is what our program looks like
 ### during the execution:
-![Sample Image](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/bash.png)
-### for option number 4, how it represents the solution graphically:
+
+![Execution of the code](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/bash.png)
+
+### for option number 4, how it represents the solution graphically:![bash](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/b8a68e42-3805-47a4-a582-f0628b8b9fce)
+
+
 ![Sample Image](https://github.com/Muzza1103/PROJET_PAA/tree/main/Projet_PAA/img/javafx.png)
 
 # How to install and run this project
@@ -102,6 +106,7 @@ Even tho this isn't really an issue, we could change this for it to be solved au
 
 * [VsCode](https://code.visualstudio.com/) - code editor
 * [Eclipse](https://eclipseide.org) - code editor
+![bash](https://github.com/Muzza1103/PROJET_PAA/assets/116688330/af9e54f1-f048-4986-a37a-deb2a625a4aa)
 
 
 ## Auteurs
