@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +39,7 @@ public class Menu {
         int choix0;
         Scanner sc = new Scanner(System.in);
         Ca ca =null;
-	File file = new File(filePath);
+        File file = new File(filePath);
     	System.out.println("Lecture du fichier "+file.getName());
         do {
             menu0();// menu de base pour l'utilisateur
@@ -75,6 +73,10 @@ public class Menu {
                         ca.afficheVillesSansZone();
 			System.out.println("Votre choix :");
                         //on affiche toutes les villes en divisant en fonction de l'existance d'une zone de recharge ou pas
+			 while (!sc.hasNextInt()) {
+	             System.out.println("\u001B[31mVeuillez entrer un nombre valide.\u001B[0m");
+	             sc.next(); // Consommer la saisie invalide
+	         }// Bloc pour gerer l'erreur si l'utilisateur n'entre pas un int.
                         choix = sc.nextInt();
                         sc.nextLine();
 
@@ -193,7 +195,7 @@ public class Menu {
         // Ferme le scanner
         sc.close();
     }
-//Menu principal.
+    //Menu principal.
     private static void menu0() {
         System.out.println("\n1 - résoudre manuellement");
         System.out.println("2 - résoudre automatiquement");
@@ -201,14 +203,14 @@ public class Menu {
         System.out.println("4 - Affichage graphique");
         System.out.println("5 - Fin");
     }
-//menu pour la resolution manuelle.
+    //Menu pour la resolution manuelle.
     private static void menu1() {
         System.out.println("\n1 - Ajouter une zone de recharge;");
         System.out.println("2 - Retirer une zone de recharge;");
         System.out.println("3 - Fin.");
     }
 
- // menu de sauvegarde si fichier existe deja 
+    //Menu de sauvegarde si fichier existe deja 
     private static void menu2() {
         System.out.println("\n1 - Remplacer le fichier existant");
         System.out.println("2 - Faire une copie");
@@ -301,8 +303,7 @@ public class Menu {
             return null;
         }
     }
-    
-    
+       
     //Algo du sujet 
     private static Ca resolutionAlgo2(Ca ca, int k) {
         int i = 0;
@@ -331,10 +332,8 @@ public class Menu {
         }
         return ca;
     }
-    
-    
-    
-    // Algo perso
+       
+    //Algo perso
     private static void resolutionAutomatique(Ca ca) {
     	List<Ville> villes = ca.getVilles(); // Creer une liste de ville 
     	boolean [][] matriceAdj = ca.getMatrice();// Cree une matrice qui represente les route 
@@ -358,12 +357,11 @@ public class Menu {
     
     // Methode pour l'affichage graphique
     private static void launchJavaFX(Ca ca) {
-        VilleRepresentation.setCa(ca); // Ajoutez cette ligne pour initialiser Ca dans VilleRepresentation
-        VilleRepresentation.launch(VilleRepresentation.class);
+        VilleRepresentation.setCa(ca); // Ajoutez cette ligne pour initialiser Ca dans VilleRepresentation.
+        VilleRepresentation.launch(VilleRepresentation.class);//lance la class qui contient la representation graphique.
     }
     
-
- // methode de Sauvegarde 
+    //Methode de Sauvegarde 
     private static void sauvegarde(String fileName, Ca ca) {
             try {
         // Vérifie si l'instance de la communauté d'agglomération est nulle
@@ -384,6 +382,10 @@ public class Menu {
         		 menu2();
         		 System.out.println("\nVotre choix :");
         		 //Choix Utilisateur
+        		 while (!sc.hasNextInt()) {
+                     System.out.println("\u001B[31mVeuillez entrer un nombre valide.\u001B[0m");
+                     sc.next(); // Consommer la saisie invalide
+                 }// Bloc pour gerer l'erreur si l'utilisateur n'entre pas un int.
         		 choix = sc.nextInt();
         		 sc.nextLine();
         		 switch(choix) {
@@ -415,7 +417,7 @@ public class Menu {
             }
         }
     
- // Méthode pour sauvegarder les données dans un fichier
+    //Méthode pour sauvegarder les données dans un fichier
     private static void ecrireCaDansFichier(String fileName, Ca ca) throws IOException {
         // Initialise un FileWriter pour écrire dans le fichier spécifié
         FileWriter fileWriter = new FileWriter(fileName);
@@ -448,7 +450,7 @@ public class Menu {
         fileWriter.close();
     }
 
-    // Méthode pour créer une copie du fichier existant avec une date ajoutée au nom du fichier
+    //Méthode pour créer une copie du fichier existant avec une date ajoutée au nom du fichier
     private static void copieFichier(String fileName, Ca ca) throws IOException {
         // Obtient la date actuelle sous forme de chaîne
         String dateString = new SimpleDateFormat("HH:mm_dd-MM-yyyy").format(new Date());
